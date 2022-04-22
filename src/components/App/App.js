@@ -4,6 +4,7 @@ import { store } from "../../store/store"
 import { Provider } from "react-redux"
 import styles from "./App.module.css"
 import { Login } from "../Login/Login"
+import { auth } from "../../api/auth"
 
 export function App() {
   const [data, setData] = useState({ chats: [] })

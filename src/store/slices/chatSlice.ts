@@ -23,13 +23,13 @@ export const chatSlice = createSlice({
   initialState: initialState,
   name: "chat",
   reducers: {
-    deleteMessage: (state, action: PayloadAction<string>) => {},
+    // deleteMessage: (state, action: PayloadAction<string>) => {},
     addMessage: (state, action: PayloadAction<Message>) => {
       state.messages.push(action.payload)
     },
   },
 })
 
-export const { addMessage, deleteMessage } = chatSlice.caseReducers
+export const { addMessage } = chatSlice.caseReducers
 
 export default chatSlice.reducer

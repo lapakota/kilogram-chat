@@ -1,5 +1,5 @@
 import { Message } from "../../models/Message"
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 const initState: Message = {
   createdAt: "",
@@ -12,9 +12,13 @@ export const messageSlice = createSlice({
   extraReducers: undefined,
   initialState: initState,
   name: "message",
-  reducers: {},
+  reducers: {
+    changeText: (state, action: PayloadAction<string>) => {
+      state.text = action.payload
+    },
+  },
 })
 
-export const {} = messageSlice.caseReducers
+export const { changeText } = messageSlice.caseReducers
 
 export default messageSlice.reducer

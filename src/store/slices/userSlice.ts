@@ -1,5 +1,5 @@
 import { User } from "../../models/User"
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 const initState: User = {
   login: "",
@@ -11,9 +11,13 @@ export const userSlice = createSlice({
   extraReducers: undefined,
   initialState: initState,
   name: "user",
-  reducers: {},
+  reducers: {
+    login: (state, action: PayloadAction<string>) => {
+      state.login = action.payload
+    },
+  },
 })
 
-export const {} = userSlice.caseReducers
+export const { login } = userSlice.caseReducers
 
 export default userSlice.reducer
