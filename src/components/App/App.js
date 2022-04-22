@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 import styles from "./App.module.css";
-import {Login} from "../Login/Login";
+import {Index} from "../Login";
+import {Register} from "../Register";
 
 export function App() {
   const [data, setData] = useState({ chats: [] });
@@ -39,30 +41,12 @@ export function App() {
 
   return (
     <div className={styles.app}>
-      <Login/>
-      {/*{data.chats.map((chat) => (*/}
-      {/*  <div className={styles.chat}>*/}
-      {/*    <header>*/}
-      {/*      <img alt="chat logo" src={`data:image/png;base64,${chat.image}`} />*/}
-      {/*      {chat.name}*/}
-      {/*    </header>*/}
-      {/*    <main>*/}
-      {/*      <ul>*/}
-      {/*        {chat.messages.map((message) => (*/}
-      {/*          <li className={styles.message}>*/}
-      {/*            {message.createdBy.image ? (*/}
-      {/*              <img*/}
-      {/*                alt="user avatar"*/}
-      {/*                src={`data:image/png;base64,${message.createdBy.image}`}*/}
-      {/*              />*/}
-      {/*            ) : null}*/}
-      {/*            {message.createdBy.login}: {message.text}*/}
-      {/*          </li>*/}
-      {/*        ))}*/}
-      {/*      </ul>*/}
-      {/*    </main>*/}
-      {/*  </div>*/}
-      {/*))}*/}
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Index />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
