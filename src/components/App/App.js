@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import styles from "./App.module.css";
+import {Login} from "../Login/Login";
 
 export function App() {
   const [data, setData] = useState({ chats: [] });
@@ -38,29 +39,30 @@ export function App() {
 
   return (
     <div className={styles.app}>
-      {data.chats.map((chat) => (
-        <div className={styles.chat}>
-          <header>
-            <img alt="chat logo" src={`data:image/png;base64,${chat.image}`} />
-            {chat.name}
-          </header>
-          <main>
-            <ul>
-              {chat.messages.map((message) => (
-                <li className={styles.message}>
-                  {message.createdBy.image ? (
-                    <img
-                      alt="user avatar"
-                      src={`data:image/png;base64,${message.createdBy.image}`}
-                    />
-                  ) : null}
-                  {message.createdBy.login}: {message.text}
-                </li>
-              ))}
-            </ul>
-          </main>
-        </div>
-      ))}
+      <Login/>
+      {/*{data.chats.map((chat) => (*/}
+      {/*  <div className={styles.chat}>*/}
+      {/*    <header>*/}
+      {/*      <img alt="chat logo" src={`data:image/png;base64,${chat.image}`} />*/}
+      {/*      {chat.name}*/}
+      {/*    </header>*/}
+      {/*    <main>*/}
+      {/*      <ul>*/}
+      {/*        {chat.messages.map((message) => (*/}
+      {/*          <li className={styles.message}>*/}
+      {/*            {message.createdBy.image ? (*/}
+      {/*              <img*/}
+      {/*                alt="user avatar"*/}
+      {/*                src={`data:image/png;base64,${message.createdBy.image}`}*/}
+      {/*              />*/}
+      {/*            ) : null}*/}
+      {/*            {message.createdBy.login}: {message.text}*/}
+      {/*          </li>*/}
+      {/*        ))}*/}
+      {/*      </ul>*/}
+      {/*    </main>*/}
+      {/*  </div>*/}
+      {/*))}*/}
     </div>
   );
 }
