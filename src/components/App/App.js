@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
+import { mainStore } from "../../stores/MainStore/mainStore"
+import { Provider } from "react-redux"
 import styles from "./App.module.css";
 import {Login} from "../Login/Login";
 
 export function App() {
-  const [data, setData] = useState({ chats: [] });
+  const [data, setData] = useState({ chats: [] })
 
   useEffect(() => {
-    const controller = new AbortController();
+    const controller = new AbortController()
 
     fetch("https://kilogram-api.yandex-urfu-2021.ru/query", {
       signal: controller.signal,
@@ -32,37 +34,16 @@ export function App() {
       }),
     })
       .then((response) => response.json())
-      .then((json) => setData(json.data));
+      .then((json) => setData(json.data))
 
-    return () => controller.abort();
-  }, []);
+    return () => controller.abort()
+  }, [])
 
   return (
-    <div className={styles.app}>
+    <Provider store={mainStore}>
+      <div className={styles.app}>
       <Login/>
-      {/*{data.chats.map((chat) => (*/}
-      {/*  <div className={styles.chat}>*/}
-      {/*    <header>*/}
-      {/*      <img alt="chat logo" src={`data:image/png;base64,${chat.image}`} />*/}
-      {/*      {chat.name}*/}
-      {/*    </header>*/}
-      {/*    <main>*/}
-      {/*      <ul>*/}
-      {/*        {chat.messages.map((message) => (*/}
-      {/*          <li className={styles.message}>*/}
-      {/*            {message.createdBy.image ? (*/}
-      {/*              <img*/}
-      {/*                alt="user avatar"*/}
-      {/*                src={`data:image/png;base64,${message.createdBy.image}`}*/}
-      {/*              />*/}
-      {/*            ) : null}*/}
-      {/*            {message.createdBy.login}: {message.text}*/}
-      {/*          </li>*/}
-      {/*        ))}*/}
-      {/*      </ul>*/}
-      {/*    </main>*/}
-      {/*  </div>*/}
-      {/*))}*/}
-    </div>
-  );
+      </div>
+    </Provider>
+  )
 }
