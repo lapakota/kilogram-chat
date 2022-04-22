@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 
-import { mainStore } from "../../stores/MainStore/mainStore"
+import { store } from "../../store/store"
 import { Provider } from "react-redux"
-import styles from "./App.module.css";
-import {Login} from "../Login/Login";
+import styles from "./App.module.css"
+import { Login } from "../Login/Login"
 
 export function App() {
   const [data, setData] = useState({ chats: [] })
@@ -40,9 +40,9 @@ export function App() {
   }, [])
 
   return (
-    <Provider store={mainStore}>
+    <Provider store={store}>
       <div className={styles.app}>
-      <Login/>
+        <Login />
       </div>
     </Provider>
   )
