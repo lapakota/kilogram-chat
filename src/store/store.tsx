@@ -1,7 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit"
+import userReducer from "./slices/userSlice"
+import messageReducer from "./slices/messageSlice"
+import chatReducer from "./slices/chatSlice"
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    user: userReducer,
+    message: messageReducer,
+    chat: chatReducer,
+  },
 })
 
 export type RootState = ReturnType<typeof store.getState>
