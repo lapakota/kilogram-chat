@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
-import styles from './App.module.css';
+import styles from "./App.module.css";
+import {Index} from "../Login";
+import {Register} from "../Register";
 
 export function App() {
   const [data, setData] = useState({ chats: [] });
@@ -8,10 +11,10 @@ export function App() {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch('https://kilogram-api.yandex-urfu-2021.ru/query', {
+    fetch("https://kilogram-api.yandex-urfu-2021.ru/query", {
       signal: controller.signal,
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         query: `{
           chats {
@@ -27,37 +30,23 @@ export function App() {
               text
             }
           }
-        }`
-      })
+        }`,
+      }),
     })
-      .then(response => response.json())
-      .then(json => setData(json.data));
+      .then((response) => response.json())
+      .then((json) => setData(json.data));
 
     return () => controller.abort();
   }, []);
 
   return (
     <div className={styles.app}>
-      {data.chats.map(chat => (
-        <div className={styles.chat}>
-          <header>
-            <img alt="chat logo" src={`data:image/png;base64,${chat.image}`} />
-            {chat.name}
-          </header>
-          <main>
-            <ul>
-              {chat.messages.map(message => (
-                <li className={styles.message}>
-                  {message.createdBy.image ?
-                    <img alt="user avatar" src={`data:image/png;base64,${message.createdBy.image}`} /> :
-                    null}
-                  {message.createdBy.login}: {message.text}
-                </li>
-              ))}
-            </ul>
-          </main>
-        </div>
-      ))}
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Index />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

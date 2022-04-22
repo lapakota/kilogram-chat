@@ -1,0 +1,27 @@
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  &__element {
+    all: unset;
+    height: 35px;
+    font-size: 14px;
+    padding: 0 10px;
+    cursor: pointer;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__register {
+    background: #87dc72;
+  }
+
+  &__login {
+    background: #89dcff;
+  }
+}
