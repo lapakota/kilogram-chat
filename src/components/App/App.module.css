@@ -1,16 +1,3 @@
 .app {
-  padding: 20px;
-}
-
-.chat {
-  margin-bottom: 20px;
-}
-
-.chat header {
-  display: flex;
-  align-items: center;
-}
-
-.chat header img {
-  margin-right: 10px;
+  height: 100%;
 }
