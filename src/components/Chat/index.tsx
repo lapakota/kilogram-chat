@@ -3,39 +3,13 @@ import React, { useEffect, useState } from "react"
 import Chat from "../../models/Chat"
 import Message from "../../models/Message"
 import { ChatMessage } from "./ChatMessage"
+import { getAllChats } from "../../api/services/chat"
 
 const ChatPage = () => {
   const [data, setData] = useState({ chats: [] })
 
   useEffect(() => {
-    const controller = new AbortController()
-
-    fetch("https://kilogram-api.yandex-urfu-2021.ru/query", {
-      signal: controller.signal,
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `{
-          chats {
-            image
-            name
-            messages {
-              createdBy { 
-                image
-                login 
-                name
-              }
-        
-              text
-            }
-          }
-        }`,
-      }),
-    })
-      .then((response) => response.json())
-      .then((json) => setData(json.data))
-
-    return () => controller.abort()
+    getAllChats().then((data) => setData(data))
   }, [])
 
   return (

@@ -69,3 +69,28 @@ export const createChat = (name: string, type: string, members: string[]) => {
     .then((response) => response.json())
     .then((json) => json.data)
 }
+
+export const sendMessage = (chatId: string, text: string) => {
+  return fetch(KILOGRAM_API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `mutation SendMessage($chatId: ID!, $text: String!){
+  sendMessage(chatId: $chatId, text: $text){
+    id
+    createdAt
+    createdBy{
+      name
+    }
+    text
+  }
+}`,
+      variables: {
+        chatId: chatId,
+        text: text,
+      },
+    }),
+  })
+    .then((response) => response.json())
+    .then((json) => json.data)
+}
