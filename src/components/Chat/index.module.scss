@@ -1,30 +1,34 @@
 .chatPage {
-  margin-bottom: 20px;
+  width: 100%;
   height: 100%;
-  background-color: gray;
+  background-color: #1D1E22;
 
   &__chat {
     height: 100%;
     display: grid;
-    grid-template-rows: 64px 1fr 100px;
-    grid-template-columns: 20% 1fr 2rem;
+    grid-template-rows: 64px 1fr 60px;
+    grid-template-columns: 25% 1fr 15%;
     overflow: hidden;
   }
 
   &__form {
-    height: 70%;
+    height: 100%;
     width: 100%;
     grid-column: 2 / 3;
     grid-row: 3 / 4;
     align-self: center;
     display: flex;
   }
+
   &__input {
-    flex-grow: 3;
-    border: none;
-    padding: 1rem;
-    font-size: 1rem;
+    all: unset;
+    position: relative;
+    width: calc(100% - .5em);
+    font-size: 16px;
+    padding-left: 1em;
+    background: #26272D;
   }
+
   &__inputButton {
     flex-grow: 1;
     font-size: 1rem;
@@ -33,15 +37,28 @@
   }
 
   &__createButton {
-    font-size: 1rem;
-
-    width: 75%;
-    height: 70%;
-    background-color: greenyellow;
+    all: unset;
     align-self: center;
     justify-self: center;
     grid-column: 1 / 2;
     grid-row: 3 / 4;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 60px);
+    height: 50%;
+    padding: 0 15px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #1D1E22;
+    background: #F1E0AC;
+    border-radius: 5px;
+
+    &:hover {
+      background: #fae4a3;
+    }
+
   }
 
   &__header {
@@ -52,24 +69,34 @@
   }
 
   &__main {
-    background-color: aqua;
+    background: #141416;
     grid-row: 2 / 3;
     grid-column: 2 / 3;
   }
 
-  &__chatsList {
-    height: 100%;
+  &__chats {
     width: 100%;
+    height: calc(100vh - 64px - 60px);
     margin: 0;
     padding: 1rem;
     display: flex;
-    list-style: none;
-    flex-direction: column;
-    justify-content: flex-end;
+    flex-direction: column-reverse;
     gap: 1rem;
-  }
+    overflow-y: scroll;
+    overflow-x: hidden;
 
-  &__message {
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #26272D;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #BDD2B6;
+      border-radius: 10px;
+    }
   }
 }
 

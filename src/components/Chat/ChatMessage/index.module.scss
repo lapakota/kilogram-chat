@@ -1,0 +1,41 @@
+.message {
+  display: flex;
+  color: #1D1E22;
+
+  .message__avatar {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+  }
+
+  .message__content {
+    display: flex;
+    flex-direction: column;
+    padding: .5em;
+
+    width: fit-content;
+    max-width: 50%;
+    min-width: 30%;
+    min-height: 3rem;
+    background: #BDD2B6;
+    word-break: break-word;
+    border-radius: 10px;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+
+    &_userName {
+    }
+
+    &_time {
+    }
+  }
+
+  &__text {
+    margin-top: .5rem;
+  }
+}
+

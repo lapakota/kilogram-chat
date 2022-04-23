@@ -11,12 +11,13 @@ export const Login: React.FC = () => {
 
   return (
     <form className={styles.login}>
-      <Input title={"Логин"} value={userLogin} onValueChange={setUserLogin} />
+      <Input title={"Логин"} value={userLogin} onValueChange={setUserLogin} placeholder={'Введите логин...'}/>
       <Input
         title={"Пароль"}
         value={userPassword}
         onValueChange={setUserPassword}
         type={"password"}
+        placeholder={'Введите пароль...'}
       />
       <AuthButtons onLogin={onLogin} />
     </form>
