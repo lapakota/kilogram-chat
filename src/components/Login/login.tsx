@@ -3,7 +3,7 @@ import styles from "./index.module.scss"
 import { Input } from "../../common/Input"
 import { AuthButtons } from "./AuthButtons"
 
-export const Index: React.FC = () => {
+export const Login: React.FC = () => {
   const [userLogin, setUserLogin] = useState("")
   const [userPassword, setUserPassword] = useState("")
 

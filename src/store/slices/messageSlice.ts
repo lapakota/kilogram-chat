@@ -1,11 +1,17 @@
-import { Message } from "../../models/Message"
+import Message from "../../models/Message"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import User from "../../models/User";
 
+const user : User = {
+  login: "", meta: [], name: ""
+
+}
 const initState: Message = {
   createdAt: "",
   id: "",
   meta: [],
   text: "",
+  createdBy: user
 }
 
 export const messageSlice = createSlice({

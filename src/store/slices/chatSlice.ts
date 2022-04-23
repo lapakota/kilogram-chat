@@ -1,7 +1,7 @@
-import { Chat } from "../../models/Chat"
-import { User } from "../../models/User"
+import  Chat  from "../../models/Chat"
+import  User  from "../../models/User"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Message } from "../../models/Message"
+import  Message  from "../../models/Message"
 
 const user: User = {
   login: "",
