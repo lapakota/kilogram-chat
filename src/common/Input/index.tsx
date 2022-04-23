@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react"
-import styles from "./Input.module.scss"
+import styles from "./index.module.scss"
 
 type InputProps = {
   title: string

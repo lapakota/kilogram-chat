@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import styles from "./index.module.css"
-import { Login } from "../Login/login"
+import { Login } from "../Login"
 import { Register } from "../Register"
 import { Provider } from "react-redux"
 import { store } from "../../store/store"
