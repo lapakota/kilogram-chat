@@ -9,13 +9,14 @@ export const getAllChats = () => {
           chats {
             image
             name
-            text
             messages {
               createdBy { 
                 image
                 login 
                 name
-              }        
+              }
+        
+              text
             }
           }
         }`,
