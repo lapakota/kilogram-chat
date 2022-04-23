@@ -2,6 +2,7 @@ import styles from "./index.module.scss"
 import React, { useEffect, useState } from "react"
 import Chat from "../../models/Chat"
 import Message from "../../models/Message"
+import { ChatMessage } from "./ChatMessage"
 
 const ChatPage = () => {
   const [data, setData] = useState({ chats: [] })
@@ -46,28 +47,23 @@ const ChatPage = () => {
             {chat.name}
           </header>
           <main className={styles.chatPage__main}>
-            <ul className={styles.chatPage__chatsList}>
+            <div className={styles.chatPage__chats}>
               {chat.messages.map((message: Message) => (
-                <li className={styles.chat__message}>
-                  {message.createdBy.image ? (
-                    <img
-                      alt="user avatar"
-                      src={`data:image/png;base64,${message.createdBy.image}`}
-                    />
-                  ) : null}
-                  {message.createdBy.login}: {message.text}
-                </li>
+                <ChatMessage
+                  login={message.createdBy.login}
+                  text={message.text}
+                  avatar={message.createdBy.image}
+                />
               ))}
-            </ul>
+            </div>
           </main>
           <button className={styles.chatPage__createButton}>Создать чат</button>
           <form className={styles.chatPage__form}>
             <input
               className={styles.chatPage__input}
               type="text"
-              placeholder="Введите сообщение"
+              placeholder="Введите сообщение..."
             />
-            <button className={styles.chatPage__inputButton}>Отправить</button>
           </form>
         </div>
       ))}

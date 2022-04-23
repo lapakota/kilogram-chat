@@ -11,14 +11,25 @@ export const Register: React.FC = () => {
 
   return (
     <form className={styles.register}>
-      <Input title={"Логин"} value={userLogin} onValueChange={setUserLogin} />
+      <Input
+        title={"Логин"}
+        value={userLogin}
+        onValueChange={setUserLogin}
+        placeholder={"Введите логин..."}
+      />
       <Input
         title={"Пароль"}
         value={userPassword}
         onValueChange={setUserPassword}
         type={"password"}
+        placeholder={"Введите пароль..."}
       />
-      <Input title={"Имя"} value={userName} onValueChange={setUserName} />
+      <Input
+        title={"Имя"}
+        value={userName}
+        onValueChange={setUserName}
+        placeholder={"Введите имя..."}
+      />
       <button className={styles.register__createUserButton} onClick={createUser}>
         Создать
       </button>
