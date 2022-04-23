@@ -4,7 +4,7 @@ import { Input } from "../../common/Input"
 import { AuthButtons } from "./AuthButtons"
 import { auth } from "../../api/auth"
 import { useNavigate } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../hooks"
+import { useAppDispatch } from "../../hooks"
 import { addToken, login } from "../../store/slices/userSlice"
 
 export const Login: React.FC = () => {
@@ -13,7 +13,6 @@ export const Login: React.FC = () => {
   const [isErrorLogin, setIsErrorLogin] = useState(false)
   const router = useNavigate()
   const dispatch = useAppDispatch()
-  const token = useAppSelector((state) => state.user.token)
 
   const onLogin = async () => {
     auth(userLogin, userPassword).then((x) => {
