@@ -10,7 +10,7 @@ export const store = configureStore({
     chat: chatReducer,
   },
 })
-//TODO Сделать юзеров и сообения через ссылки по id логинам
+
 export type RootState = ReturnType<typeof store.getState>
 
 export type AppDispatch = typeof store.dispatch

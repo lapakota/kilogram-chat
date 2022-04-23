@@ -1,7 +1,7 @@
-import  Chat  from "../../models/Chat"
-import  User  from "../../models/User"
+import Chat from "../../models/Chat"
+import User from "../../models/User"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import  Message  from "../../models/Message"
+import Message from "../../models/Message"
 
 const user: User = {
   login: "",
@@ -23,13 +23,15 @@ export const chatSlice = createSlice({
   initialState: initialState,
   name: "chat",
   reducers: {
-    // deleteMessage: (state, action: PayloadAction<string>) => {},
+    deleteMessage: (state, action: PayloadAction<Message>) => {
+      state.messages.filter((message) => message.id !== action.payload.id)
+    },
     addMessage: (state, action: PayloadAction<Message>) => {
       state.messages.push(action.payload)
     },
   },
 })
 
-export const { addMessage } = chatSlice.caseReducers
+export const { addMessage, deleteMessage } = chatSlice.caseReducers
 
 export default chatSlice.reducer
