@@ -1,12 +1,12 @@
 import User from "../../models/User"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { stat } from "fs"
 
 const initState: User = {
   login: "",
   meta: [],
   name: "",
   image: "",
+  token: "",
 }
 
 export const userSlice = createSlice({
@@ -23,9 +23,12 @@ export const userSlice = createSlice({
     changeName: (state, action: PayloadAction<string>) => {
       state.name = action.payload
     },
+    addToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload
+    },
   },
 })
 
-export const { login, changeImage, changeName } = userSlice.caseReducers
+export const { login, changeImage, changeName, addToken } = userSlice.actions
 
 export default userSlice.reducer

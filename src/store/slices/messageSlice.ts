@@ -1,17 +1,19 @@
 import Message from "../../models/Message"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import User from "../../models/User";
+import User from "../../models/User"
 
-const user : User = {
-  login: "", meta: [], name: ""
-
+const user: User = {
+  login: "",
+  meta: [],
+  name: "",
+  token: "",
 }
 const initState: Message = {
   createdAt: "",
   id: "",
   meta: [],
   text: "",
-  createdBy: user
+  createdBy: user,
 }
 
 export const messageSlice = createSlice({
@@ -25,6 +27,6 @@ export const messageSlice = createSlice({
   },
 })
 
-export const { changeText } = messageSlice.caseReducers
+export const { changeText } = messageSlice.actions
 
 export default messageSlice.reducer

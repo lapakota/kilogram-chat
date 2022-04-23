@@ -7,6 +7,7 @@ const user: User = {
   login: "",
   meta: [],
   name: "",
+  token: "",
 }
 const initialState: Chat = {
   id: "",
@@ -32,6 +33,6 @@ export const chatSlice = createSlice({
   },
 })
 
-export const { addMessage, deleteMessage } = chatSlice.caseReducers
+export const { addMessage, deleteMessage } = chatSlice.actions
 
 export default chatSlice.reducer

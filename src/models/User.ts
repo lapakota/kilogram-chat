@@ -5,4 +5,5 @@ export default interface User {
   login: string
   meta: Meta[]
   name: string
+  token: string
 }
