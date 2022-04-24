@@ -13,11 +13,10 @@ const ChatPage = () => {
 
   const [messageText, setMessageText] = useState("")
   const chats = useAppSelector((state) => state.chats.chats)
-  const [isCreteChat, setIsCreateChat] = useState(false)
+  const [isCreateChat, setIsCreateChat] = useState(false)
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      console.log("enter press here! ")
       if (chats.length !== 0) {
         sendMessage(chats[0].id, messageText).then((_) => setMessageText(""))
       }
@@ -30,7 +29,7 @@ const ChatPage = () => {
 
   return (
     <div className={styles.chatPage}>
-      {isCreteChat ? (
+      {isCreateChat ? (
         <CreateChat setIsCreateChat={setIsCreateChat} />
       ) : (
         <>
