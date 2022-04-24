@@ -1,5 +1,7 @@
+import { KILOGRAM_API_URL } from "../config"
+
 export function auth(login: string, password: string) {
-  return fetch("https://kilogram-api.yandex-urfu-2021.ru/query", {
+  return fetch(KILOGRAM_API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

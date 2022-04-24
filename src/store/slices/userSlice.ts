@@ -1,7 +1,9 @@
-import User from "../../models/User"
+import BaseUser from "../../models/BaseUser"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import User from "../../models/User"
 
 const initState: User = {
+  activeChat: 0,
   login: "",
   meta: [],
   name: "",
@@ -26,9 +28,13 @@ export const userSlice = createSlice({
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload
     },
+    changeChat: (state, action: PayloadAction<number>) => {
+      state.activeChat = action.payload
+    },
   },
 })
 
-export const { login, changeImage, changeName, setToken } = userSlice.actions
+export const { login, changeImage, changeName, setToken, changeChat } =
+  userSlice.actions
 
 export default userSlice.reducer

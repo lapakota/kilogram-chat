@@ -1,9 +1,9 @@
 import Chat from "../../models/Chat"
-import User from "../../models/User"
+import BaseUser from "../../models/BaseUser"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import Message from "../../models/Message"
 
-const user: User = {
+const user: BaseUser = {
   login: "",
   meta: [],
   name: "",

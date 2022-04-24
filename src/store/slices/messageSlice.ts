@@ -1,8 +1,8 @@
 import Message from "../../models/Message"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import User from "../../models/User"
+import BaseUser from "../../models/BaseUser"
 
-const user: User = {
+const user: BaseUser = {
   login: "",
   meta: [],
   name: "",

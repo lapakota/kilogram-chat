@@ -1,9 +1,5 @@
-import Meta from "./Meta"
+import BaseUser from "./BaseUser"
 
-export default interface User {
-  image?: string
-  login: string
-  meta: Meta[]
-  name: string
-  token: string
+export default interface User extends BaseUser {
+  activeChat: number
 }

@@ -1,7 +1,7 @@
-import User from "../../models/User"
+import BaseUser from "../../models/BaseUser"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-const initState: { users: User[] } = {
+const initState: { users: BaseUser[] } = {
   users: [],
 }
 
@@ -10,7 +10,7 @@ export const usersSlice = createSlice({
   initialState: initState,
   name: "users",
   reducers: {
-    setUsers: (state, action: PayloadAction<User[]>) => {
+    setUsers: (state, action: PayloadAction<BaseUser[]>) => {
       state.users = action.payload
     },
   },

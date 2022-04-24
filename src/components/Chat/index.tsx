@@ -26,7 +26,6 @@ const ChatPage = () => {
 
   useEffect(() => {
     getAllChats().then((data) => dispatch(setChats(data.chats)))
-    console.log(chats)
   }, [])
 
   return (
