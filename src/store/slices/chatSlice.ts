@@ -27,12 +27,22 @@ export const chatSlice = createSlice({
     deleteMessage: (state, action: PayloadAction<Message>) => {
       state.messages.filter((message) => message.id !== action.payload.id)
     },
-    addMessage: (state, action: PayloadAction<Message>) => {
+    addMessageId: (state, action: PayloadAction<Message>) => {
       state.messages.push(action.payload)
+    },
+    setChat: (state, action: PayloadAction<Chat>) => {
+      state.messages = action.payload.messages
+      state.id = action.payload.id
+      state.name = action.payload.name
+      state.image = action.payload.image
+      state.meta = action.payload.meta
+      state.members = action.payload.members
+      state.owner = action.payload.owner
+      state.type = action.payload.type
     },
   },
 })
 
-export const { addMessage, deleteMessage } = chatSlice.actions
+export const { addMessageId, deleteMessage, setChat } = chatSlice.actions
 
 export default chatSlice.reducer

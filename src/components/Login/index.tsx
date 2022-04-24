@@ -5,7 +5,7 @@ import { AuthButtons } from "./AuthButtons"
 import { auth } from "../../api/auth"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../../hooks"
-import { addToken, login } from "../../store/slices/userSlice"
+import { setToken, login } from "../../store/slices/userSlice"
 
 export const Login: React.FC = () => {
   const [userLogin, setUserLogin] = useState("")
@@ -16,10 +16,9 @@ export const Login: React.FC = () => {
 
   const onLogin = async () => {
     auth(userLogin, userPassword).then((x) => {
-      console.log(x)
       if (x.signIn !== null) {
         router("/chat")
-        dispatch(addToken(x.signIn))
+        dispatch(setToken(x.signIn))
         dispatch(login(userLogin))
       } else {
         setIsErrorLogin(true)

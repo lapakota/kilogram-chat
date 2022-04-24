@@ -24,6 +24,13 @@ export const messageSlice = createSlice({
     changeText: (state, action: PayloadAction<string>) => {
       state.text = action.payload
     },
+    setMessage: (state, action: PayloadAction<Message>) => {
+      state.text = action.payload.text
+      state.id = action.payload.id
+      state.meta = action.payload.meta
+      state.createdAt = action.payload.createdAt
+      state.createdBy = action.payload.createdBy
+    },
   },
 })
 

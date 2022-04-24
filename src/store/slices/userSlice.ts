@@ -23,12 +23,12 @@ export const userSlice = createSlice({
     changeName: (state, action: PayloadAction<string>) => {
       state.name = action.payload
     },
-    addToken: (state, action: PayloadAction<string>) => {
+    setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload
     },
   },
 })
 
-export const { login, changeImage, changeName, addToken } = userSlice.actions
+export const { login, changeImage, changeName, setToken } = userSlice.actions
 
 export default userSlice.reducer
