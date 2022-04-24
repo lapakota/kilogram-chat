@@ -18,6 +18,7 @@ export const Register: React.FC = () => {
     if (!userLogin || !userPassword || !userName) {
       setIsIncorrectInput(true)
       setIsUserExist(false)
+      return
     }
     register(userLogin, userPassword, userName).then((x) => {
       if (x.register === null) {
@@ -31,7 +32,7 @@ export const Register: React.FC = () => {
   return (
     <form className={styles.register}>
       {isIncorrectInput && <p>Неккоторектный ввод</p>}
-      {isUserExist && <p>Пользователь существует</p>}
+      {isUserExist && <p>Пользователь с таким логином существует</p>}
       <Input
         title={"Логин"}
         value={userLogin}

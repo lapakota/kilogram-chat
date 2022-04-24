@@ -16,7 +16,8 @@ export const Login: React.FC = () => {
 
   const onLogin = async () => {
     auth(userLogin, userPassword).then((x) => {
-      if (x !== null) {
+      console.log(x)
+      if (x.signIn !== null) {
         router("/chat")
         dispatch(addToken(x.signIn))
         dispatch(login(userLogin))
