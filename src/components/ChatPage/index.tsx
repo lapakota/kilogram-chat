@@ -1,6 +1,6 @@
 import styles from "./index.module.scss"
 import React, { useEffect, useState } from "react"
-import { getAllChats, sendMessage } from "../../api/services/chat"
+import { getAllChats } from "../../api/services/chat"
 import ChatList from "./ChatList/index"
 import Chat from "./Chat"
 import { useAppDispatch, useAppSelector } from "../../hooks"
