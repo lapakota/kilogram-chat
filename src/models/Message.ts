@@ -1,10 +1,10 @@
 import Meta from "./Meta"
-import User from "./User";
+import BaseUser from "./BaseUser"
 
 export default interface Message {
   id: string
   createdAt: string
-  createdBy: User;
+  createdBy: BaseUser
   meta: Meta[]
   text: string
 }
