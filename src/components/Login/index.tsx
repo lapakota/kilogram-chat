@@ -7,17 +7,24 @@ export const Login: React.FC = () => {
   const [userLogin, setUserLogin] = useState("")
   const [userPassword, setUserPassword] = useState("")
 
-  const onLogin = () => {}
+  const onLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+  }
 
   return (
     <form className={styles.login}>
-      <Input title={"Логин"} value={userLogin} onValueChange={setUserLogin} placeholder={'Введите логин...'}/>
+      <Input
+        title={"Логин"}
+        value={userLogin}
+        onValueChange={setUserLogin}
+        placeholder={"Введите логин..."}
+      />
       <Input
         title={"Пароль"}
         value={userPassword}
         onValueChange={setUserPassword}
         type={"password"}
-        placeholder={'Введите пароль...'}
+        placeholder={"Введите пароль..."}
       />
       <AuthButtons onLogin={onLogin} />
     </form>

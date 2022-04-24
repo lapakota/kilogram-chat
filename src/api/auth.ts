@@ -1,7 +1,9 @@
+import {KILOGRAM_API_URL} from "../config";
+
 export function auth(login: string, password: string) {
   const controller = new AbortController()
 
-  fetch("https://kilogram-api.yandex-urfu-2021.ru/query", {
+  fetch(KILOGRAM_API_URL, {
     signal: controller.signal,
     method: "POST",
     headers: { "Content-Type": "application/json" },

@@ -1,34 +1,31 @@
 import styles from "./index.module.scss"
-import React from "react"
+import React, { Key } from "react"
+import Message from "../../../models/Message"
 
 type ChatMessageProps = {
-  text: string
-  login: string
-  avatar?: string
+  message: Message
 }
 
-export const ChatMessage: React.FC<ChatMessageProps> = ({
-  text,
-  login,
-  avatar = null,
-}) => {
+export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   return (
-    <div className={styles.message}>
+    <div key={message.id} className={styles.message}>
       <img
         className={styles.message__avatar}
         alt="user avatar"
         src={
-          avatar
-            ? `data:image/png;base64,${avatar}`
+          message.createdBy.image
+            ? `data:image/png;base64,${message.createdBy.image}`
             : "https://w7.pngwing.com/pngs/547/748/png-transparent-anonymous-avatar-youtube-anonymity-anonymous-emblem-photography-logo.png"
         }
       />
       <div className={styles.message__content}>
         <div className={styles.message__title}>
-          <span className={styles.message__title_userName}>{login}</span>
+          <span className={styles.message__title_userName}>
+            {message.createdBy.login}
+          </span>
           <span className={styles.message__title_time}>{"13/06/2001"}</span>
         </div>
-        <span className={styles.message__text}>{text}</span>
+        <span className={styles.message__text}>{message.text}</span>
       </div>
     </div>
   )

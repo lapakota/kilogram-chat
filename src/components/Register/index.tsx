@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, {useState} from "react"
 import styles from "./index.module.scss"
 import { Input } from "../../common/Input"
 
@@ -7,7 +7,9 @@ export const Register: React.FC = () => {
   const [userPassword, setUserPassword] = useState("")
   const [userName, setUserName] = useState("")
 
-  const createUser = () => {}
+  const createUser = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+  }
 
   return (
     <form className={styles.register}>
@@ -30,7 +32,7 @@ export const Register: React.FC = () => {
         onValueChange={setUserName}
         placeholder={"Введите имя..."}
       />
-      <button className={styles.register__createUserButton} onClick={createUser}>
+      <button className={styles.register__createUserButton} onClick={(e) => createUser(e)}>
         Создать
       </button>
     </form>
