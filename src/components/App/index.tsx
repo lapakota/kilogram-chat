@@ -5,7 +5,6 @@ import { Login } from "../Login"
 import { Register } from "../Register"
 import { Provider } from "react-redux"
 import { store } from "../../store/store"
-import Chat from "../ChatPage/Chat"
 import ChatPage from "../ChatPage";
 
 export function App() {

@@ -1,5 +1,5 @@
 import styles from "./index.module.scss"
-import React, { Key } from "react"
+import React from "react"
 import Message from "../../../models/Message"
 
 type ChatMessageProps = {

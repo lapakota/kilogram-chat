@@ -52,7 +52,7 @@ export const CreateChat: React.FC<createChatProps> = ({ setIsCreateChat }) => {
 
   useEffect(() => {
     getAllUsers().then((data) => dispatch(setUsers(data.users)))
-  }, [])
+  }, [dispatch])
 
   return (
     <form className={styles.createChat}>

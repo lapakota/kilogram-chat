@@ -1,7 +1,7 @@
 import Chat from "../../../models/Chat"
 import styles from "../index.module.scss"
 import defaultAvatar from "../../../assets/defaultAvatar.png"
-import { changeChat, login } from "../../../store/slices/userSlice"
+import { changeChat } from "../../../store/slices/userSlice"
 import { useAppDispatch } from "../../../hooks"
 
 type ChatLabelProps = {
@@ -23,7 +23,7 @@ const ChatLabel = ({ className, chat }: ChatLabelProps) => {
         className={styles.chatPage__chatLabel__image}
         style={imgStyle}
         src={chat.image ? `data:image/png;base64,${chat.image}` : defaultAvatar}
-        alt={"Chat Image"}
+        alt={"Chat avatar"}
       />
       <span className={styles.chatPage__chatLabel__name}>{chat.name}</span>
       {lastMessage && (

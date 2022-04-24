@@ -3,7 +3,6 @@ import styles from "./index.module.scss"
 import { Input } from "../../common/Input"
 import { register } from "../../api/register"
 import { useNavigate } from "react-router-dom"
-import { useAppDispatch } from "../../hooks"
 
 export const Register: React.FC = () => {
   const [userLogin, setUserLogin] = useState("")
@@ -12,7 +11,6 @@ export const Register: React.FC = () => {
   const [isUserExist, setIsUserExist] = useState(false)
   const [isIncorrectInput, setIsIncorrectInput] = useState(false)
   const router = useNavigate()
-  const dispatch = useAppDispatch()
 
   const createUser = () => {
     if (!userLogin || !userPassword || !userName) {

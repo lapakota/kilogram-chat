@@ -18,7 +18,7 @@ const Header = ({ chat, className }: HeaderProps) => {
         className={styles.chatPage__chatLabel__image}
         style={imgStyle}
         src={chat.image ? `data:image/png;base64,${chat.image}` : defaultAvatar}
-        alt={"Chat Image"}
+        alt={"Chat avatar"}
       />
       <span className={styles.chatPage__chatLabel__name}>{chat.name}</span>
     </header>
