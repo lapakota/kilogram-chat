@@ -11,7 +11,10 @@ export const AuthButtons: React.FC<AuthButtonsProps> = ({ onLogin }) => {
   return (
     <div className={styles.buttons}>
       <Link className={styles.buttons__link} to={"/register"}>
-        <button className={cn(styles.buttons__element, styles.buttons__register)}>
+        <button
+          className={cn(styles.buttons__element, styles.buttons__register)}
+          type="button"
+        >
           Зарегистрироваться
         </button>
       </Link>

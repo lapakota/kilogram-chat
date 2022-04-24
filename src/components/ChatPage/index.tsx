@@ -16,7 +16,7 @@ const ChatPage = () => {
     if (event.key === "Enter") {
       event.preventDefault()
       if (data.chats.length !== 0) {
-        sendMessage(data.chats[0].id, messageText, "").then((_) => setMessageText(""))
+        sendMessage(data.chats[0].id, messageText, ).then((_) => setMessageText(""))
       }
     }
   }

@@ -14,7 +14,7 @@ export function App() {
       <div className={styles.app}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route index element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/chat" element={<ChatPage />} />
           </Routes>
