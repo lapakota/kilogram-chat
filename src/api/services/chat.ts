@@ -34,6 +34,12 @@ export const getAllUsers = () => {
       query: `query GetAllUsers{
         users(first:100){
             name
+            login
+            image
+            meta {
+                key
+                val
+            }
         }
       }`,
     }),
@@ -42,10 +48,15 @@ export const getAllUsers = () => {
     .then((json) => json.data)
 }
 
-export const createChat = (name: string, type: string, members: string[]) => {
+export const createChat = (
+  name: string,
+  type: string,
+  members: string[],
+  token: string
+) => {
   return fetch(KILOGRAM_API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify({
       query: `mutation CreateChat($name:String!, $type:ChatType!, $members: [String!]!){
   createChat(name:$name, type: $type, members: $members){
