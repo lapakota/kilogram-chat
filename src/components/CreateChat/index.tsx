@@ -39,8 +39,11 @@ export const CreateChat: React.FC<createChatProps> = ({ setIsCreateChat }) => {
 
   const onClick = () => {
     if (chatName) {
-      createChat(chatName, chatType, members.current, token).then((_) => {
-        setIsCreateChat(false)
+      createChat(chatName, chatType, members.current, token).then((x) => {
+        if (x !== null) setIsCreateChat(false)
+        else {
+          setIsErrorInput(true)
+        }
       })
     } else {
       setIsErrorInput(true)

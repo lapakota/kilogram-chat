@@ -6,7 +6,7 @@ export const getAllChats = (token: string) => {
     headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify({
       query: `{
-          chats {
+          chats(first: 100) {
             id
             image
             name
