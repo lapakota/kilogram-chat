@@ -14,13 +14,15 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 }) => {
   return (
     <div className={styles.message}>
-      {avatar && (
-        <img
-          className={styles.message__avatar}
-          alt="user avatar"
-          src={`data:image/png;base64,${avatar}`}
-        />
-      )}
+      <img
+        className={styles.message__avatar}
+        alt="user avatar"
+        src={
+          avatar
+            ? `data:image/png;base64,${avatar}`
+            : "https://w7.pngwing.com/pngs/547/748/png-transparent-anonymous-avatar-youtube-anonymity-anonymous-emblem-photography-logo.png"
+        }
+      />
       <div className={styles.message__content}>
         <div className={styles.message__title}>
           <span className={styles.message__title_userName}>{login}</span>

@@ -3,39 +3,24 @@ import React, { useEffect, useState } from "react"
 import Chat from "../../models/Chat"
 import Message from "../../models/Message"
 import { ChatMessage } from "./ChatMessage"
+import { getAllChats, sendMessage } from "../../api/services/chat"
 
 const ChatPage = () => {
-  const [data, setData] = useState({ chats: [] })
+  const [data, setData] = useState<{ chats: Chat[] }>({ chats: [] })
+
+  const [messageText, setMessageText] = useState("")
+
+  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      console.log("enter press here! ")
+      if (data.chats.length !== 0) {
+        sendMessage(data.chats[0].id, messageText).then((_) => setMessageText(""))
+      }
+    }
+  }
 
   useEffect(() => {
-    const controller = new AbortController()
-
-    fetch("https://kilogram-api.yandex-urfu-2021.ru/query", {
-      signal: controller.signal,
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `{
-          chats {
-            image
-            name
-            messages {
-              createdBy { 
-                image
-                login 
-                name
-              }
-        
-              text
-            }
-          }
-        }`,
-      }),
-    })
-      .then((response) => response.json())
-      .then((json) => setData(json.data))
-
-    return () => controller.abort()
+    getAllChats().then((data) => setData(data))
   }, [])
 
   return (
@@ -63,6 +48,9 @@ const ChatPage = () => {
               className={styles.chatPage__input}
               type="text"
               placeholder="Введите сообщение..."
+              onChange={(e) => setMessageText(e.target.value)}
+              value={messageText}
+              onKeyDown={(e) => onKeyDown(e)}
             />
           </form>
         </div>
