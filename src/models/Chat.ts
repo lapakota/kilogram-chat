@@ -1,6 +1,6 @@
-import BaseUser from "./BaseUser"
 import Message from "./Message"
 import Meta from "./Meta"
+import BaseUser from "./BaseUser";
 
 export default interface Chat {
   id: string

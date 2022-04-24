@@ -4,8 +4,8 @@ import { Input } from "../../common/Input"
 import { AuthButtons } from "./AuthButtons"
 import { auth } from "../../api/auth"
 import { useNavigate } from "react-router-dom"
-import { useAppDispatch } from "../../hooks"
 import { setToken, login } from "../../store/slices/userSlice"
+import { useAppDispatch } from "../../hooks"
 
 export const Login: React.FC = () => {
   const [userLogin, setUserLogin] = useState("")
@@ -14,12 +14,13 @@ export const Login: React.FC = () => {
   const router = useNavigate()
   const dispatch = useAppDispatch()
 
-  const onLogin = async () => {
+  const onLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     auth(userLogin, userPassword).then((x) => {
       if (x.signIn !== null) {
-        router("/chat")
         dispatch(setToken(x.signIn))
         dispatch(login(userLogin))
+        router("/chat")
       } else {
         setIsErrorLogin(true)
       }
