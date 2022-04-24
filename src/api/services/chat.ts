@@ -1,22 +1,24 @@
 import { KILOGRAM_API_URL } from "../../config"
 
-export const getAllChats = () => {
+export const getAllChats = (token: string) => {
   return fetch(KILOGRAM_API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify({
       query: `{
           chats {
+            id
             image
             name
             messages {
+              id
+              text
+              createdAt
               createdBy { 
                 image
                 login 
                 name
               }
-        
-              text
             }
           }
         }`,

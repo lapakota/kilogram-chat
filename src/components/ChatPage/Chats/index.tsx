@@ -1,6 +1,5 @@
-import React, { useState } from "react"
+import React from "react"
 import ChatModel from "../../../models/Chat"
-import { sendMessage } from "../../../api/services/chat"
 import styles from "../index.module.scss"
 import Chat from "../Chat"
 
@@ -9,7 +8,7 @@ type ChatsProps = {
   chats: ChatModel[]
 }
 
-const Chats = ({ className, chats }: ChatsProps) => {
+const Chats = ({ chats }: ChatsProps) => {
 
   return (
     <div>
@@ -20,7 +19,7 @@ const Chats = ({ className, chats }: ChatsProps) => {
             {chat.name}
           </header>
           <main className={styles.chatPage__main}>
-            <Chat className={styles.chatPage__chats} data={chat} />
+            <Chat className={styles.chatPage__chats} chatId={0} />
           </main>
         </div>
       ))}

@@ -28,7 +28,7 @@ export const userSlice = createSlice({
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload
     },
-    changeChat: (state, action: PayloadAction<number>) => {
+    changeChat: (state, action: PayloadAction<number | string>) => {
       state.activeChat = action.payload
     },
   },

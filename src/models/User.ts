@@ -1,5 +1,5 @@
-import BaseUser from "./BaseUser"
+import BaseUser from "./BaseUser";
 
 export default interface User extends BaseUser {
-  activeChat: number
+  activeChat: number | string
 }

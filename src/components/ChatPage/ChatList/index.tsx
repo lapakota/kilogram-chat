@@ -1,4 +1,6 @@
 import ChatModel from "../../../models/Chat"
+import ChatLabel from "./ChatLabel"
+import styles from "../index.module.scss";
 
 type ChatListProps = {
   className?: string
@@ -7,11 +9,11 @@ type ChatListProps = {
 
 const ChatList = ({ className, chats }: ChatListProps) => {
   return (
-    <div className={`styles.chatPage__chatList ${className}`}>
+    <div className={className}>
       {chats.map((chat) => (
-        <div key={chat.id}>{chat.name}</div>
+        <ChatLabel key={chat.id} className={styles.chatPage__chatLabel} chat={chat} />
       ))}
     </div>
   )
 }
-export default ChatList;
+export default ChatList

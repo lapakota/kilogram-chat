@@ -1,17 +1,21 @@
 import React from "react"
-import ChatModel from "../../../models/Chat"
 import Message from "../../../models/Message"
 import { ChatMessage } from "../ChatMessage"
+import {useAppSelector} from "../../../hooks";
 
 type ChatProps = {
   className?: string
-  data: ChatModel
+  chatId: number | string
 }
 
-const Chat = ({ className, data }: ChatProps) => {
+const Chat = ({ className, chatId }: ChatProps) => {
+  const chat = useAppSelector((state) => state.chats.chats.find(x => x.id === chatId));
+  if (!chat){
+    return null;
+  }
   return (
     <div className={className}>
-      {data.messages.map((message: Message) => (
+      {chat.messages.map((message: Message) => (
         <ChatMessage key={message.id} message={message} />
       ))}
     </div>

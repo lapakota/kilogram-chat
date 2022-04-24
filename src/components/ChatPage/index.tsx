@@ -1,40 +1,50 @@
 import styles from "./index.module.scss"
 import React, { useEffect, useState } from "react"
-import ChatModel from "../../models/Chat"
 import { getAllChats, sendMessage } from "../../api/services/chat"
 import ChatList from "./ChatList/index"
+import Chat from "./Chat"
+import { useAppDispatch, useAppSelector } from "../../hooks"
+import { setChats } from "../../store/slices/chatsSlice"
+import ChatInput from "./ChatInput/ChatInput"
+import { CreateChat } from "../CreateChat"
+import Header from "./Header/Header"
 
 const ChatPage = () => {
-  const [data, setData] = useState<{ chats: ChatModel[] }>({ chats: [] })
-  const [messageText, setMessageText] = useState("")
+  const dispatch = useAppDispatch()
+  const chats = useAppSelector((state) => state.chats.chats)
+  const activeChatId = useAppSelector((state) => state.user.activeChat)
+  const activeChat = chats.find((chat) => chat.id === activeChatId)
+  const token = useAppSelector((state) => state.user.token)
+  const [isCreateChat, setIsCreateChat] = useState(false)
 
   useEffect(() => {
-    getAllChats().then((data) => setData(data))
+    getAllChats(token).then((data) => dispatch(setChats(data.chats)))
   }, [])
-
-  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      event.preventDefault()
-      if (data.chats.length !== 0) {
-        sendMessage(data.chats[0].id, messageText, ).then((_) => setMessageText(""))
-      }
-    }
+  const onSendMessage = () => {
+    getAllChats(token).then((data) => dispatch(setChats(data.chats)))
   }
-
   return (
     <div className={styles.chatPage}>
-      <ChatList chats={data.chats} />
-      <form className={styles.chatPage__form}>
-        <input
-          className={styles.chatPage__input}
-          type="text"
-          placeholder="Введите сообщение..."
-          onChange={(e) => setMessageText(e.target.value)}
-          value={messageText}
-          onKeyDown={(e) => onKeyDown(e)}
-        />
-      </form>
-      <button className={styles.chatPage__createButton}>Создать чат</button>
+      {isCreateChat ? (
+        <CreateChat setIsCreateChat={setIsCreateChat} />
+      ) : (
+        <>
+          {activeChat && (
+            <Header chat={activeChat} className={styles.chatPage__header} />
+          )}
+          <ChatList className={styles.chatPage__chatList} chats={chats} />
+          <main className={styles.chatPage__main}>
+            <Chat className={styles.chatPage__chat} chatId={activeChatId} />
+          </main>
+          <ChatInput onSendMessage={onSendMessage} chat={activeChat} />
+          <button
+            onClick={() => setIsCreateChat(true)}
+            className={styles.chatPage__createButton}
+          >
+            Создать чат
+          </button>
+        </>
+      )}
     </div>
   )
 }

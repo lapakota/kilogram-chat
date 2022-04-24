@@ -8,7 +8,7 @@ type ChatMessageProps = {
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   return (
-    <div key={message.id} className={styles.message}>
+    <div className={styles.message}>
       <img
         className={styles.message__avatar}
         alt="user avatar"
@@ -23,7 +23,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
           <span className={styles.message__title_userName}>
             {message.createdBy.login}
           </span>
-          <span className={styles.message__title_time}>{"13/06/2001"}</span>
+          <span className={styles.message__title_time}>{new Date(message.createdAt).toLocaleDateString()}</span>
         </div>
         <span className={styles.message__text}>{message.text}</span>
       </div>
