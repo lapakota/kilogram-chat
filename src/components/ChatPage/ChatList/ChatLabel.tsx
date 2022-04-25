@@ -2,8 +2,9 @@ import Chat from "../../../models/Chat"
 import styles from "../index.module.scss"
 import defaultAvatar from "../../../assets/defaultAvatar.png"
 import { changeChat } from "../../../store/slices/userSlice"
-import { useAppDispatch } from "../../../hooks"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { formatDate } from "../../../utils/dateFormater"
+import cn from "classnames"
 
 type ChatLabelProps = {
   className: string
@@ -16,10 +17,16 @@ const imgStyle = {
 }
 
 const ChatLabel = ({ className, chat }: ChatLabelProps) => {
+  const activeChatID = useAppSelector((state) => state.user.activeChat)
+
   const lastMessage = chat.messages[0]
   const dispatch = useAppDispatch()
+
   return (
-    <div onClick={() => dispatch(changeChat(chat.id))} className={className}>
+    <div
+      onClick={() => dispatch(changeChat(chat.id))}
+      className={cn(className, { [styles.activeChat]: activeChatID === chat.id })}
+    >
       <img
         className={styles.chatPage__chatLabel__image}
         style={imgStyle}
