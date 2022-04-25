@@ -1,3 +1,7 @@
+.owner {
+  justify-content: flex-end;
+}
+
 .message {
   display: flex;
   color: #1D1E22;
@@ -19,7 +23,6 @@
     min-width: 30%;
     min-height: 3rem;
     background: #BDD2B6;
-    word-break: break-word;
     border-radius: 10px;
   }
 
