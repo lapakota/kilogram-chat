@@ -2,35 +2,42 @@ import styles from "./index.module.scss"
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 import { CHATS_TYPES } from "../../config"
 import { Input } from "../../common/Input"
-import { createChat, getAllUsers } from "../../api/services/chat"
+import { createChat, getAllChats, getAllUsers } from "../../api/services/chat"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { setUsers } from "../../store/slices/usersSlice"
+import { setChats } from "../../store/slices/chatsSlice"
 
-interface createChatProps {
+interface CreateChatProps {
   setIsCreateChat: Dispatch<SetStateAction<boolean>>
 }
 
-export const CreateChat: React.FC<createChatProps> = ({ setIsCreateChat }) => {
-  const [chatName, setChatName] = useState("")
+export const CreateChat: React.FC<CreateChatProps> = ({ setIsCreateChat }) => {
   const members = useRef<string[]>([])
+  const [chatName, setChatName] = useState("")
   const [chatType, setChatType] = useState<string>(CHATS_TYPES.CHANNEL)
   const [nameMember, setNameMember] = useState("")
   const [isErrorSearchUser, setIsErrorSearchUser] = useState(false)
-  const dispatch = useAppDispatch()
-  const usersNames = useAppSelector((state) => state.users.users.map((x) => x.login))
-  const [isAddedUser, setIsAddedUser] = useState(false)
+  const [isAddedUser, setIsUserAdded] = useState(false)
   const [isErrorInput, setIsErrorInput] = useState(false)
-  const token = useAppSelector((state) => state.user.token)
+
+  const dispatch = useAppDispatch()
+
+  const user = useAppSelector((state) => state.user)
+  const token = user.token
+
+  const usersNames = useAppSelector((state) =>
+    state.users.users.map((x) => x.login).filter((x) => x !== user.login)
+  )
 
   const addMember = () => {
-    setIsAddedUser(false)
+    setIsUserAdded(false)
     setIsErrorSearchUser(false)
     if (usersNames.includes(nameMember)) {
       if (!members.current.includes(nameMember)) {
         members.current.push(nameMember)
         setNameMember("")
       } else {
-        setIsAddedUser(true)
+        setIsUserAdded(true)
       }
     } else {
       setIsErrorSearchUser(true)
@@ -40,8 +47,10 @@ export const CreateChat: React.FC<createChatProps> = ({ setIsCreateChat }) => {
   const onClick = () => {
     if (chatName) {
       createChat(chatName, chatType, members.current, token).then((x) => {
-        if (x !== null) setIsCreateChat(false)
-        else {
+        if (x !== null) {
+          setIsCreateChat(false)
+          getAllChats(token).then((data) => dispatch(setChats(data.chats)))
+        } else {
           setIsErrorInput(true)
         }
       })

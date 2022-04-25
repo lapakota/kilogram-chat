@@ -3,6 +3,7 @@ import styles from "../index.module.scss"
 import defaultAvatar from "../../../assets/defaultAvatar.png"
 import { changeChat } from "../../../store/slices/userSlice"
 import { useAppDispatch } from "../../../hooks"
+import { formatDate } from "../../../utils/dateFormater"
 
 type ChatLabelProps = {
   className: string
@@ -33,7 +34,7 @@ const ChatLabel = ({ className, chat }: ChatLabelProps) => {
           </span>
 
           <span className={styles.chatPage__chatLabel__date}>
-            {new Date(lastMessage.createdAt).toLocaleDateString()}
+            {formatDate(lastMessage.createdAt)}
           </span>
         </>
       )}
