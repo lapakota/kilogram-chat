@@ -2,6 +2,7 @@ import styles from "../index.module.scss"
 import React, { useState } from "react"
 import { sendMessage } from "../../../api/services/chat"
 import Chat from "../../../models/Chat"
+import { useAppSelector } from "../../../hooks"
 
 type InputProps = {
   chat: Chat | undefined
@@ -10,15 +11,18 @@ type InputProps = {
 
 const ChatInput = ({ chat, onSendMessage }: InputProps) => {
   const [messageText, setMessageText] = useState("")
-  if (!chat) return null;
+
+  const token = useAppSelector((state) => state.user.token)
+
+  if (!chat) return null
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       event.preventDefault()
-      if (messageText === ""){
-        return;
+      if (messageText === "") {
+        return
       }
-      sendMessage(chat.id, messageText).then(() => {
+      sendMessage(chat.id, messageText, token).then(() => {
         setMessageText("")
         onSendMessage()
       })
