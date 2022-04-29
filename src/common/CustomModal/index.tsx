@@ -12,7 +12,12 @@ export const CustomModal: React.FC<PropsModal> = ({
   children,
 }) => {
   return (
-    <Modal style={customStyles} className={classname} isOpen={isOpen}>
+    <Modal
+      style={customStyles}
+      className={classname}
+      isOpen={isOpen}
+      ariaHideApp={false}
+    >
       {children}
     </Modal>
   )
