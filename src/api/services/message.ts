@@ -1,7 +1,7 @@
 import { KILOGRAM_API_URL } from "../../config"
 
 export const editMessage = (
-  chatId: string,
+  chatId: string | number,
   messageId: string,
   text: string,
   token: string

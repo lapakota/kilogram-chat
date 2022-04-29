@@ -1,26 +1,32 @@
 import React, { Dispatch, useState } from "react"
-import { useAppDispatch, useAppSelector } from "../../hooks"
+import { useAppSelector } from "../../hooks"
 import { editMessage } from "../../api/services/message"
 import { CustomModal } from "../../common/CustomModal"
+import Message from "../../models/Message"
 
 interface ModalChangeMessageProps {
   isOpen: boolean
   setIsOpen: Dispatch<boolean>
+  message: Message
 }
 
 export const ModalChangeMessage: React.FC<ModalChangeMessageProps> = ({
   isOpen,
   setIsOpen,
+  message,
 }) => {
-  const message = useAppSelector((state) => state.message)
-  const chatId = useAppSelector((state) => state.chat.id)
+  const chatId = useAppSelector((state) => state.user.activeChat)
   const token = useAppSelector((state) => state.user.token)
+
   const [textMessage, setTextMessage] = useState(message.text)
-  const dispatch = useAppDispatch()
 
   const closeModal = () => {
     editMessage(chatId, message.id, textMessage, token).then((x) => {
-      setIsOpen(false)
+      if (x.editMessage !== null) {
+        setIsOpen(false)
+        console.log(x)
+      } else {
+      }
     })
   }
   return (

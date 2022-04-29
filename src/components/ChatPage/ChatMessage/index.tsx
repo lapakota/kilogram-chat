@@ -1,41 +1,37 @@
 import styles from "./index.module.scss"
-import React, { Dispatch, useState } from "react"
+import React, { useState } from "react"
 import Message from "../../../models/Message"
 import cn from "classnames"
+import { formatDate } from "../../../utils/dateFormater"
 import { useAppSelector } from "../../../hooks"
-import {formatDate} from "../../../utils/dateFormater";
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { setMessage } from "../../../store/slices/messageSlice"
+import { ModalChangeMessage } from "../../ModalChangeMessage"
 
 type ChatMessageProps = {
   message: Message
-  setIsOpenModalChangeMessage: Dispatch<boolean>
 }
 
-export const ChatMessage: React.FC<ChatMessageProps> = ({
-  message,
-  setIsOpenModalChangeMessage,
-}) => {
-  const dispatch = useAppDispatch()
+export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   const loginUser = useAppSelector((state) => state.user.login)
+  const [isOpenModalChangeMessage, setIsOpenModalChangeMessage] = useState(false)
 
   const onClick = () => {
     if (message.createdBy.login === loginUser) {
-      dispatch(setMessage(message))
-      setIsOpenModalChangeMessage(false)
+      setIsOpenModalChangeMessage(true)
     }
   }
-
-export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
-  const userLogin = useAppSelector((state) => state.user.login)
-
   return (
     <div
+      onClick={onClick}
       className={cn(
         styles.message,
-        userLogin === message.createdBy.login ? styles.owner : ""
+        loginUser === message.createdBy.login ? styles.owner : ""
       )}
     >
+      <ModalChangeMessage
+        isOpen={isOpenModalChangeMessage}
+        setIsOpen={setIsOpenModalChangeMessage}
+        message={message}
+      />
       <img
         className={styles.message__avatar}
         alt="user avatar"
