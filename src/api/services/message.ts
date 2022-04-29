@@ -1,9 +1,14 @@
 import { KILOGRAM_API_URL } from "../../config"
 
-export const editMessage = (chatId: string, messageId: string, text: string) => {
+export const editMessage = (
+  chatId: string,
+  messageId: string,
+  text: string,
+  token: string
+) => {
   return fetch(KILOGRAM_API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify({
       query: `mutation EditMessage($chatId:ID!, $messageId:ID!, $text: String!){
   editMessage(chatId: $chatId, messageId: $messageId, text: $text){
