@@ -1,0 +1,56 @@
+.createChat {
+  position: relative;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  &__button {
+    all: unset;
+    height: 35px;
+    color: #1D1E22;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  &__cancelButton {
+    width: 100%;
+    background: #BDD2B6;
+
+    &:hover {
+      background: #d0f0c0;
+    }
+  }
+
+  &__createButton {
+    width: 100%;
+    background: #F1E0AC;
+
+    &:hover {
+      background: #fae4a3;
+    }
+  }
+
+
+  .memberAdd {
+    width: 300px;
+
+    .listMembers {
+      max-height: 100px;
+      overflow: auto;
+      list-style: none;
+    }
+  }
+
+  .selectorTypes {
+    text-align: center;
+  }
+}
