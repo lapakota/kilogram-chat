@@ -64,7 +64,6 @@
   }
 
   &__createButton {
-    all: unset;
     align-self: center;
     justify-self: center;
     grid-column: 1 / 2;
@@ -76,16 +75,6 @@
     width: calc(100% - 60px);
     height: 50%;
     padding: 0 15px;
-    font-size: 16px;
-    cursor: pointer;
-    color: #1D1E22;
-    background: #F1E0AC;
-    border-radius: 5px;
-
-    &:hover {
-      background: #fae4a3;
-    }
-
   }
 
   &__header {

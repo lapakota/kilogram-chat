@@ -8,6 +8,7 @@ import { setChats } from "../../store/slices/chatsSlice"
 import ChatInput from "./ChatInput"
 import { CreateChatModal } from "../CreateChatModal"
 import Header from "./Header"
+import { ButtonColors, CustomButton } from "../../common/CustomButton"
 
 const ChatPage = () => {
   const dispatch = useAppDispatch()
@@ -46,12 +47,12 @@ const ChatPage = () => {
         <Chat className={styles.chatPage__chat} chatId={activeChatId} />
       </main>
       <ChatInput onSendMessage={onSendMessage} chat={activeChat} />
-      <button
-        onClick={() => setCreatingChat(true)}
+      <CustomButton
         className={styles.chatPage__createButton}
-      >
-        Создать чат
-      </button>
+        text={"Создать чат"}
+        color={ButtonColors.Orange}
+        onClick={() => setCreatingChat(true)}
+      />
     </div>
   )
 }
