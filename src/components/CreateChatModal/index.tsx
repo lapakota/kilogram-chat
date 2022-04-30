@@ -7,13 +7,17 @@ import { useAppDispatch, useAppSelector } from "../../hooks"
 import { setUsers } from "../../store/slices/usersSlice"
 import { setChats } from "../../store/slices/chatsSlice"
 import { CustomModal } from "../../common/CustomModal"
+import cn from "classnames"
 
 interface CreateChatProps {
   creatingChat: boolean
   setIsCreatingChat: Dispatch<SetStateAction<boolean>>
 }
 
-export const CreateChatModal: React.FC<CreateChatProps> = ({ creatingChat, setIsCreatingChat }) => {
+export const CreateChatModal: React.FC<CreateChatProps> = ({
+  creatingChat,
+  setIsCreatingChat,
+}) => {
   const members = useRef<string[]>([])
   const [chatName, setChatName] = useState("")
   const [chatType, setChatType] = useState<string>(CHATS_TYPES.CHANNEL)
@@ -32,6 +36,8 @@ export const CreateChatModal: React.FC<CreateChatProps> = ({ creatingChat, setIs
   )
 
   const addMember = () => {
+    if (nameMember.trim().length === 0) return
+
     setIsUserAdded(false)
     setIsErrorSearchUser(false)
     if (usersNames.includes(nameMember)) {
@@ -101,10 +107,8 @@ export const CreateChatModal: React.FC<CreateChatProps> = ({ creatingChat, setIs
             value={nameMember}
             onValueChange={setNameMember}
             placeholder="Имя участника"
+            onEnter={addMember}
           />
-          <button type="button" onClick={addMember}>
-            Добавить
-          </button>
           <ul className={styles.listMembers}>
             {members.current.map((member) => (
               <li key={member}>{member}</li>
@@ -112,11 +116,25 @@ export const CreateChatModal: React.FC<CreateChatProps> = ({ creatingChat, setIs
           </ul>
         </div>
         <div className={styles.buttons}>
-          <button type="button" onClick={onClick}>
-            Создать чат
+          <button
+            className={cn(
+              styles.createChat__button,
+              styles.createChat__cancelButton
+            )}
+            type="button"
+            onClick={() => setIsCreatingChat(false)}
+          >
+            Отменить
           </button>
-          <button type="button" onClick={() => setIsCreatingChat(false)}>
-            Назад
+          <button
+            className={cn(
+              styles.createChat__button,
+              styles.createChat__createButton
+            )}
+            type="button"
+            onClick={onClick}
+          >
+            Создать
           </button>
         </div>
       </form>

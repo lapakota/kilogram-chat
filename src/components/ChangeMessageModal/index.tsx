@@ -1,11 +1,10 @@
-import React, { Dispatch, useState } from "react"
+import React, { useState } from "react"
 import { useAppSelector } from "../../hooks"
 import { editMessage } from "../../api/services/message"
 import { CustomModal } from "../../common/CustomModal"
 import Message from "../../models/Message"
 import styles from "./index.module.scss"
 import cn from "classnames"
-import { sendMessage } from "../../api/services/chat"
 
 interface ChangeMessageModalProps {
   isOpen: boolean

@@ -1,21 +1,11 @@
-.changeMessage {
+.createChat {
+  position: relative;
+  width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 300px;
 
-  &__input {
-    all: unset;
-    position: relative;
-    width: calc(100% - 2em);
-    font-size: 16px;
-    padding: 1em;
-    margin-bottom: 15px;
-    background: #26272D;
-  }
-
-  &__buttons {
+  .buttons {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -31,7 +21,7 @@
     text-align: center;
   }
 
-  &__resetButton {
+  &__cancelButton {
     width: 100%;
     background: #BDD2B6;
 
@@ -40,12 +30,27 @@
     }
   }
 
-  &__saveButton {
+  &__createButton {
     width: 100%;
     background: #F1E0AC;
 
     &:hover {
       background: #fae4a3;
     }
+  }
+
+
+  .memberAdd {
+    width: 300px;
+
+    .listMembers {
+      max-height: 100px;
+      overflow: auto;
+      list-style: none;
+    }
+  }
+
+  .selectorTypes {
+    text-align: center;
   }
 }

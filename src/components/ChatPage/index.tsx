@@ -5,9 +5,9 @@ import ChatList from "./ChatList/index"
 import Chat from "./Chat"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { setChats } from "../../store/slices/chatsSlice"
-import ChatInput from "./ChatInput/ChatInput"
-import { CreateChatModal } from "../CreateChat"
-import Header from "./Header/Header"
+import ChatInput from "./ChatInput"
+import { CreateChatModal } from "../CreateChatModal"
+import Header from "./Header"
 
 const ChatPage = () => {
   const dispatch = useAppDispatch()

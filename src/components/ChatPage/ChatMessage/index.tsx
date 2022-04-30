@@ -10,6 +10,9 @@ type ChatMessageProps = {
   message: Message
 }
 
+const BLANK_USER_AVATAR =
+  "https://w7.pngwing.com/pngs/547/748/png-transparent-anonymous-avatar-youtube-anonymity-anonymous-emblem-photography-logo.png"
+
 export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   const loginUser = useAppSelector((state) => state.user.login)
   const [isChangeMessageModalOpened, setIsChangeMessageModalOpened] = useState(false)
@@ -39,7 +42,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
         src={
           message.createdBy.image
             ? `data:image/png;base64,${message.createdBy.image}`
-            : "https://w7.pngwing.com/pngs/547/748/png-transparent-anonymous-avatar-youtube-anonymity-anonymous-emblem-photography-logo.png"
+            : BLANK_USER_AVATAR
         }
       />
       <div className={styles.message__content}>
