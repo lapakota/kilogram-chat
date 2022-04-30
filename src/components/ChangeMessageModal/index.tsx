@@ -4,7 +4,6 @@ import { deleteMessage, editMessage } from "../../api/services/message"
 import { CustomModal } from "../../common/CustomModal"
 import Message from "../../models/Message"
 import styles from "./index.module.scss"
-import cn from "classnames"
 import { ButtonColors, CustomButton } from "../../common/CustomButton"
 
 interface ChangeMessageModalProps {
