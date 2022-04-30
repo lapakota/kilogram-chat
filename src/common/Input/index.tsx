@@ -7,6 +7,7 @@ type InputProps = {
   onValueChange: Dispatch<SetStateAction<string>>
   placeholder?: string
   type?: string
+  onEnter?: () => void
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -15,7 +16,12 @@ export const Input: React.FC<InputProps> = ({
   onValueChange,
   placeholder = "",
   type = "text",
+  onEnter = () => {},
 }) => {
+  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    event.key === "Enter" && onEnter()
+  }
+
   return (
     <section className={styles.input}>
       <h2 className={styles.input__title}>{title}</h2>
@@ -25,6 +31,7 @@ export const Input: React.FC<InputProps> = ({
         onChange={(e) => onValueChange(e.target.value)}
         placeholder={placeholder}
         type={type}
+        onKeyDown={onKeyDown}
       />
     </section>
   )

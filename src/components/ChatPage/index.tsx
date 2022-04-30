@@ -5,9 +5,9 @@ import ChatList from "./ChatList/index"
 import Chat from "./Chat"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { setChats } from "../../store/slices/chatsSlice"
-import ChatInput from "./ChatInput/ChatInput"
-import { CreateChat } from "../CreateChat"
-import Header from "./Header/Header"
+import ChatInput from "./ChatInput"
+import { CreateChatModal } from "../CreateChatModal"
+import Header from "./Header"
 
 const ChatPage = () => {
   const dispatch = useAppDispatch()
@@ -18,7 +18,12 @@ const ChatPage = () => {
   const [creatingChat, setCreatingChat] = useState(false)
 
   useEffect(() => {
-    getAllChats(token).then((data) => dispatch(setChats(data.chats)))
+    const unsubscribe = setInterval(
+      () => getAllChats(token).then((data) => dispatch(setChats(data.chats))),
+      500
+    )
+
+    return () => clearInterval(unsubscribe)
   }, [dispatch, token])
 
   const onSendMessage = () => {
@@ -27,16 +32,18 @@ const ChatPage = () => {
 
   return (
     <div className={styles.chatPage}>
+      {creatingChat && (
+        <CreateChatModal
+          creatingChat={creatingChat}
+          setIsCreatingChat={setCreatingChat}
+        />
+      )}
       {activeChat && (
         <Header chat={activeChat} className={styles.chatPage__header} />
       )}
       <ChatList className={styles.chatPage__chatList} chats={chats} />
       <main className={styles.chatPage__main}>
-        {creatingChat ? (
-          <CreateChat setIsCreateChat={setCreatingChat} />
-        ) : (
-          <Chat className={styles.chatPage__chat} chatId={activeChatId} />
-        )}
+        <Chat className={styles.chatPage__chat} chatId={activeChatId} />
       </main>
       <ChatInput onSendMessage={onSendMessage} chat={activeChat} />
       <button
