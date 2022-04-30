@@ -31,10 +31,14 @@ export const editMessage = (
     .then((json) => json.data)
 }
 
-export const deleteMessage = (chatId: string, messageId: string) => {
+export const deleteMessage = (
+  chatId: string | number,
+  messageId: string,
+  token: string
+) => {
   return fetch(KILOGRAM_API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify({
       query: `mutation DeleteMessage($chatId:ID!, $messageId:ID!){
   deleteMessage(chatId: $chatId, messageId: $messageId)

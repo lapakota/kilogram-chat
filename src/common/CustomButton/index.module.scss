@@ -22,3 +22,11 @@
     background: #fae4a3;
   }
 }
+
+.red {
+  background: #c65d61;
+
+  &:hover {
+    background: #da5c61;
+  }
+}

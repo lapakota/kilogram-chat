@@ -5,6 +5,7 @@ import cn from "classnames"
 export enum ButtonColors {
   Green,
   Orange,
+  Red
 }
 
 type CustomButtonProps = {
@@ -28,6 +29,8 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
         return styles.green
       case ButtonColors.Orange:
         return styles.orange
+      case ButtonColors.Red:
+        return styles.red
       default:
         return ""
     }

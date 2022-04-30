@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "../../hooks"
 import { setUsers } from "../../store/slices/usersSlice"
 import { setChats } from "../../store/slices/chatsSlice"
 import { CustomModal } from "../../common/CustomModal"
-import cn from "classnames"
 import { ButtonColors, CustomButton } from "../../common/CustomButton"
 
 interface CreateChatProps {
