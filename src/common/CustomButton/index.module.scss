@@ -1,0 +1,32 @@
+.button {
+  all: unset;
+  height: 35px;
+  color: #1D1E22;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.green {
+  background: #BDD2B6;
+
+  &:hover {
+    background: #d0f0c0;
+  }
+}
+
+.orange {
+  background: #F1E0AC;
+
+  &:hover {
+    background: #fae4a3;
+  }
+}
+
+.red {
+  background: #c65d61;
+
+  &:hover {
+    background: #da5c61;
+  }
+}

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks"
 import { setUsers } from "../../store/slices/usersSlice"
 import { setChats } from "../../store/slices/chatsSlice"
 import { CustomModal } from "../../common/CustomModal"
-import cn from "classnames"
+import { ButtonColors, CustomButton } from "../../common/CustomButton"
 
 interface CreateChatProps {
   creatingChat: boolean
@@ -52,7 +52,7 @@ export const CreateChatModal: React.FC<CreateChatProps> = ({
     }
   }
 
-  const onClick = () => {
+  const onCreateChat = () => {
     if (chatName) {
       createChat(chatName, chatType, members.current, token).then((x) => {
         if (x !== null) {
@@ -116,26 +116,18 @@ export const CreateChatModal: React.FC<CreateChatProps> = ({
           </ul>
         </div>
         <div className={styles.buttons}>
-          <button
-            className={cn(
-              styles.createChat__button,
-              styles.createChat__cancelButton
-            )}
-            type="button"
+          <CustomButton
+            text={"Отменить"}
             onClick={() => setIsCreatingChat(false)}
-          >
-            Отменить
-          </button>
-          <button
-            className={cn(
-              styles.createChat__button,
-              styles.createChat__createButton
-            )}
-            type="button"
-            onClick={onClick}
-          >
-            Создать
-          </button>
+            color={ButtonColors.Green}
+            style={{ width: "100%" }}
+          />
+          <CustomButton
+            text={"Создать"}
+            onClick={onCreateChat}
+            color={ButtonColors.Orange}
+            style={{ width: "100%" }}
+          />
         </div>
       </form>
     </CustomModal>
