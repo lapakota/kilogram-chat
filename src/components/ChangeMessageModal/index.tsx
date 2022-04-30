@@ -1,10 +1,11 @@
 import React, { useState } from "react"
 import { useAppSelector } from "../../hooks"
-import { editMessage } from "../../api/services/message"
+import { deleteMessage, editMessage } from "../../api/services/message"
 import { CustomModal } from "../../common/CustomModal"
 import Message from "../../models/Message"
 import styles from "./index.module.scss"
 import cn from "classnames"
+import { ButtonColors, CustomButton } from "../../common/CustomButton"
 
 interface ChangeMessageModalProps {
   isOpen: boolean
@@ -36,6 +37,12 @@ export const ChangeMessageModal: React.FC<ChangeMessageModalProps> = ({
     setMessageText(message.text)
   }
 
+  const deleteMessageAndCloseModal = () => {
+    deleteMessage(chatId, message.id, token).then((x) => {
+      setIsOpen(false)
+    })
+  }
+
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.key === "Enter" && saveAndCloseModal()
   }
@@ -50,25 +57,25 @@ export const ChangeMessageModal: React.FC<ChangeMessageModalProps> = ({
           onKeyDown={onKeyDown}
         />
         <div className={styles.changeMessage__buttons}>
-          <button
-            className={cn(
-              styles.changeMessage__button,
-              styles.changeMessage__resetButton
-            )}
+          <CustomButton
+            text={"Сбросить"}
             onClick={resetEditedText}
-          >
-            Сбросить
-          </button>
-          <button
-            className={cn(
-              styles.changeMessage__button,
-              styles.changeMessage__saveButton
-            )}
+            color={ButtonColors.Green}
+            style={{ width: "100%" }}
+          />
+          <CustomButton
+            text={"Сохранить"}
             onClick={saveAndCloseModal}
-          >
-            Сохранить
-          </button>
+            color={ButtonColors.Orange}
+            style={{ width: "100%" }}
+          />
         </div>
+        <CustomButton
+          text={"Удалить"}
+          onClick={deleteMessageAndCloseModal}
+          color={ButtonColors.Red}
+          style={{ width: "100%", marginTop: "15px" }}
+        />
       </div>
     </CustomModal>
   )

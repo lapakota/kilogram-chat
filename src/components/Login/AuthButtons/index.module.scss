@@ -4,34 +4,8 @@
   justify-content: space-between;
   margin-top: 15px;
 
-  &__element {
-    all: unset;
-    height: 35px;
-    color: #1D1E22;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-
   &__link {
     text-decoration: none;
     color: inherit;
-  }
-
-  &__register {
-    padding: 0 10px;
-    background: #BDD2B6;
-
-    &:hover {
-      background: #d0f0c0;
-    }
-  }
-
-  &__login {
-    padding: 0 30px;
-    background: #F1E0AC;
-
-    &:hover {
-      background: #fae4a3;
-    }
   }
 }

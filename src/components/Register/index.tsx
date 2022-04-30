@@ -3,6 +3,7 @@ import styles from "./index.module.scss"
 import { Input } from "../../common/Input"
 import { register } from "../../api/register"
 import { useNavigate } from "react-router-dom"
+import { ButtonColors, CustomButton } from "../../common/CustomButton"
 
 export const Register: React.FC = () => {
   const [userLogin, setUserLogin] = useState("")
@@ -29,7 +30,7 @@ export const Register: React.FC = () => {
   }
   return (
     <form className={styles.register}>
-      {isIncorrectInput && <p>Неккоторектный ввод</p>}
+      {isIncorrectInput && <p>Некорректный ввод</p>}
       {isUserExist && <p>Пользователь с таким логином существует</p>}
       <Input
         title={"Логин"}
@@ -50,13 +51,12 @@ export const Register: React.FC = () => {
         onValueChange={setUserName}
         placeholder={"Введите имя..."}
       />
-      <button
-        className={styles.register__createUserButton}
+      <CustomButton
+        text={"Создать"}
         onClick={createUser}
-        type="button"
-      >
-        Создать
-      </button>
+        color={ButtonColors.Orange}
+        style={{ width: "100%" }}
+      />
     </form>
   )
 }
