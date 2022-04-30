@@ -6,12 +6,14 @@ import { createChat, getAllChats, getAllUsers } from "../../api/services/chat"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { setUsers } from "../../store/slices/usersSlice"
 import { setChats } from "../../store/slices/chatsSlice"
+import { CustomModal } from "../../common/CustomModal"
 
 interface CreateChatProps {
-  setIsCreateChat: Dispatch<SetStateAction<boolean>>
+  creatingChat: boolean
+  setIsCreatingChat: Dispatch<SetStateAction<boolean>>
 }
 
-export const CreateChat: React.FC<CreateChatProps> = ({ setIsCreateChat }) => {
+export const CreateChatModal: React.FC<CreateChatProps> = ({ creatingChat, setIsCreatingChat }) => {
   const members = useRef<string[]>([])
   const [chatName, setChatName] = useState("")
   const [chatType, setChatType] = useState<string>(CHATS_TYPES.CHANNEL)
@@ -48,7 +50,7 @@ export const CreateChat: React.FC<CreateChatProps> = ({ setIsCreateChat }) => {
     if (chatName) {
       createChat(chatName, chatType, members.current, token).then((x) => {
         if (x !== null) {
-          setIsCreateChat(false)
+          setIsCreatingChat(false)
           getAllChats(token).then((data) => dispatch(setChats(data.chats)))
         } else {
           setIsErrorInput(true)
@@ -64,54 +66,60 @@ export const CreateChat: React.FC<CreateChatProps> = ({ setIsCreateChat }) => {
   }, [dispatch])
 
   return (
-    <form className={styles.createChat}>
-      {isErrorInput && (
-        <p style={{ color: "white" }}>Неверный ввод или данный чат уже существует</p>
-      )}
-      <Input
-        title="Название"
-        value={chatName}
-        onValueChange={setChatName}
-        placeholder="Название чата..."
-      />
-      <select
-        value={chatType}
-        onChange={(e) => setChatType(e.target.value)}
-        placeholder="Тип чата"
-        className={styles.selectorTypes}
-      >
-        <option value={CHATS_TYPES.CHANNEL}>Канал</option>
-        <option value={CHATS_TYPES.GROUP}>Группа</option>
-        <option value={CHATS_TYPES.PRIVATE}>Приватный чат</option>
-      </select>
-      <div className={styles.memberAdd}>
-        {isErrorSearchUser && (
-          <p style={{ color: "white" }}>Пользователь не найден</p>
+    <CustomModal isOpen={creatingChat}>
+      <form className={styles.createChat}>
+        {isErrorInput && (
+          <p style={{ color: "white" }}>
+            Неверный ввод или данный чат уже существует
+          </p>
         )}
-        {isAddedUser && <p style={{ color: "white" }}>Пользователь уже в списке</p>}
         <Input
-          title="Имя"
-          value={nameMember}
-          onValueChange={setNameMember}
-          placeholder="Имя участника"
+          title="Название"
+          value={chatName}
+          onValueChange={setChatName}
+          placeholder="Название чата..."
         />
-        <button type="button" onClick={addMember}>
-          Добавить
-        </button>
-        <ul className={styles.listMembers}>
-          {members.current.map((member) => (
-            <li key={member}>{member}</li>
-          ))}
-        </ul>
-      </div>
-      <div className={styles.buttons}>
-        <button type="button" onClick={onClick}>
-          Создать чат
-        </button>
-        <button type="button" onClick={() => setIsCreateChat(false)}>
-          Назад
-        </button>
-      </div>
-    </form>
+        <select
+          value={chatType}
+          onChange={(e) => setChatType(e.target.value)}
+          placeholder="Тип чата"
+          className={styles.selectorTypes}
+        >
+          <option value={CHATS_TYPES.CHANNEL}>Канал</option>
+          <option value={CHATS_TYPES.GROUP}>Группа</option>
+          <option value={CHATS_TYPES.PRIVATE}>Приватный чат</option>
+        </select>
+        <div className={styles.memberAdd}>
+          {isErrorSearchUser && (
+            <p style={{ color: "white" }}>Пользователь не найден</p>
+          )}
+          {isAddedUser && (
+            <p style={{ color: "white" }}>Пользователь уже в списке</p>
+          )}
+          <Input
+            title="Имя"
+            value={nameMember}
+            onValueChange={setNameMember}
+            placeholder="Имя участника"
+          />
+          <button type="button" onClick={addMember}>
+            Добавить
+          </button>
+          <ul className={styles.listMembers}>
+            {members.current.map((member) => (
+              <li key={member}>{member}</li>
+            ))}
+          </ul>
+        </div>
+        <div className={styles.buttons}>
+          <button type="button" onClick={onClick}>
+            Создать чат
+          </button>
+          <button type="button" onClick={() => setIsCreatingChat(false)}>
+            Назад
+          </button>
+        </div>
+      </form>
+    </CustomModal>
   )
 }

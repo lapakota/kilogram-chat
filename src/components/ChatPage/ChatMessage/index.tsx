@@ -4,7 +4,7 @@ import Message from "../../../models/Message"
 import cn from "classnames"
 import { formatDate } from "../../../utils/dateFormater"
 import { useAppSelector } from "../../../hooks"
-import { ModalChangeMessage } from "../../ModalChangeMessage"
+import { ChangeMessageModal } from "../../ChangeMessageModal"
 
 type ChatMessageProps = {
   message: Message
@@ -12,13 +12,14 @@ type ChatMessageProps = {
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   const loginUser = useAppSelector((state) => state.user.login)
-  const [isOpenModalChangeMessage, setIsOpenModalChangeMessage] = useState(false)
+  const [isChangeMessageModalOpened, setIsChangeMessageModalOpened] = useState(false)
 
   const onClick = () => {
     if (message.createdBy.login === loginUser) {
-      setIsOpenModalChangeMessage(true)
+      setIsChangeMessageModalOpened(true)
     }
   }
+
   return (
     <div
       onClick={onClick}
@@ -27,9 +28,9 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
         loginUser === message.createdBy.login ? styles.owner : ""
       )}
     >
-      <ModalChangeMessage
-        isOpen={isOpenModalChangeMessage}
-        setIsOpen={setIsOpenModalChangeMessage}
+      <ChangeMessageModal
+        isOpen={isChangeMessageModalOpened}
+        setIsOpen={setIsChangeMessageModalOpened}
         message={message}
       />
       <img

@@ -1,3 +1,52 @@
-.ChangeMessageModal {
+.changeMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+
+  &__input {
+    all: unset;
+    position: relative;
+    width: calc(100% - 2em);
+    font-size: 16px;
+    padding: 1em;
+    margin-bottom: 15px;
+    background: #26272D;
+  }
+
+  &__buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  &__button {
+    all: unset;
+    height: 35px;
+    color: #1D1E22;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  &__resetButton {
+    width: 100%;
+    background: #BDD2B6;
+
+    &:hover {
+      background: #d0f0c0;
+    }
+  }
+
+  &__saveButton {
+    width: 100%;
+    background: #F1E0AC;
+
+    &:hover {
+      background: #fae4a3;
+    }
+  }
 
 }

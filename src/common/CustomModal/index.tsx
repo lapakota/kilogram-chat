@@ -24,6 +24,9 @@ export const CustomModal: React.FC<PropsModal> = ({
 }
 
 const customStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
   content: {
     top: "50%",
     left: "50%",
@@ -31,5 +34,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    backgroundColor: "#1D1E22",
+    border: "none",
   },
 }
