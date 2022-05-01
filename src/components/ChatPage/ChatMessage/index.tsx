@@ -17,7 +17,7 @@ const BLANK_USER_AVATAR =
 export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   const loginUser = useAppSelector((state) => state.user.login)
   const [isChangeMessageModalOpened, setIsChangeMessageModalOpened] = useState(false)
-  const [editable] = useState(message.createdBy.login === loginUser)
+  const editable = message.createdBy.login === loginUser
 
   const onEditMessage = () => {
     if (editable) {
