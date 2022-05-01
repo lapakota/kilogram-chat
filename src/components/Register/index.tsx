@@ -55,7 +55,7 @@ export const Register: React.FC = () => {
         text={"Создать"}
         onClick={createUser}
         color={ButtonColors.Orange}
-        style={{ width: "100%" }}
+        style={{ width: "100%", marginTop: "19px" }}
       />
     </form>
   )

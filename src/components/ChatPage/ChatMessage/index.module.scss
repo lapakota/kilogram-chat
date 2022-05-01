@@ -40,5 +40,11 @@
   &__text {
     margin-top: .5rem;
   }
+
+  &__editButton {
+    all: unset;
+    width: 24px;
+    cursor: pointer;
+  }
 }
 
