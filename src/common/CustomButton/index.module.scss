@@ -5,28 +5,29 @@
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
+  transition: background-color .5s;
 }
 
 .green {
-  background: #BDD2B6;
+  background-color: #BDD2B6;
 
   &:hover {
-    background: #d0f0c0;
+    background-color: #d0f0c0;
   }
 }
 
 .orange {
-  background: #F1E0AC;
+  background-color: #F1E0AC;
 
   &:hover {
-    background: #fae4a3;
+    background-color: #fae4a3;
   }
 }
 
 .red {
-  background: #c65d61;
+  background-color: #c65d61;
 
   &:hover {
-    background: #da5c61;
+    background-color: #da5c61;
   }
 }
