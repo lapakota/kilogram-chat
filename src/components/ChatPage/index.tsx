@@ -10,6 +10,8 @@ import { CreateChatModal } from "../CreateChatModal"
 import Header from "./Header"
 import { ButtonColors, CustomButton } from "../../common/CustomButton"
 import { ChatInfo } from "./ChatInfo"
+import { ChangeMessageModal } from "../ChangeMessageModal"
+import Message from "../../models/Message"
 
 const ChatPage = () => {
   const dispatch = useAppDispatch()
@@ -17,7 +19,10 @@ const ChatPage = () => {
   const activeChatId = useAppSelector((state) => state.user.activeChat)
   const activeChat = chats.find((chat) => chat.id === activeChatId)
   const token = useAppSelector((state) => state.user.token)
+
+  const [changeMessage, setChangeMessage] = useState<Message>()
   const [creatingChat, setCreatingChat] = useState(false)
+  const [isChangeMessageModalOpened, setIsChangeMessageModalOpened] = useState(false)
 
   useEffect(() => {
     const unsubscribe = setInterval(
@@ -34,10 +39,15 @@ const ChatPage = () => {
 
   return (
     <div className={styles.chatPage}>
-      {creatingChat && (
-        <CreateChatModal
-          creatingChat={creatingChat}
-          setIsCreatingChat={setCreatingChat}
+      <CreateChatModal
+        creatingChat={creatingChat}
+        setIsCreatingChat={setCreatingChat}
+      />
+      {changeMessage !== undefined && (
+        <ChangeMessageModal
+          message={changeMessage}
+          isOpen={isChangeMessageModalOpened}
+          setIsOpen={setIsChangeMessageModalOpened}
         />
       )}
       {activeChat && (
@@ -45,7 +55,12 @@ const ChatPage = () => {
       )}
       <ChatList className={styles.chatPage__chatList} chats={chats} />
       <main className={styles.chatPage__main}>
-        <Chat className={styles.chatPage__chat} chatId={activeChatId} />
+        <Chat
+          className={styles.chatPage__chat}
+          chatId={activeChatId}
+          setIsChangeMessageModalOpened={setIsChangeMessageModalOpened}
+          setChangeMessage={setChangeMessage}
+        />
       </main>
       <ChatInput onSendMessage={onSendMessage} chat={activeChat} />
       <ChatInfo />
