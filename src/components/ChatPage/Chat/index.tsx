@@ -30,7 +30,7 @@ const Chat = ({
       {chat ? (
         chat.messages.map((message: Message) => (
           <ChatMessage
-            key={message.id}
+            key={message.id + message.createdAt}
             message={message}
             setIsChangeMessageModalOpened={setIsChangeMessageModalOpened}
             setChangeMessage={setChangeMessage}
