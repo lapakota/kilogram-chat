@@ -1,26 +1,31 @@
 import styles from "./index.module.scss"
-import React, { useState } from "react"
+import React, { Dispatch } from "react"
 import Message from "../../../models/Message"
 import cn from "classnames"
 import { formatDate } from "../../../utils/dateFormater"
 import { useAppSelector } from "../../../hooks"
-import { ChangeMessageModal } from "../../ChangeMessageModal"
 import editImage from "../../../assets/edit.png"
 
 type ChatMessageProps = {
   message: Message
+  setIsChangeMessageModalOpened: Dispatch<boolean>
+  setChangeMessage: Dispatch<Message>
 }
 
 const BLANK_USER_AVATAR =
   "https://w7.pngwing.com/pngs/547/748/png-transparent-anonymous-avatar-youtube-anonymity-anonymous-emblem-photography-logo.png"
 
-export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
+export const ChatMessage: React.FC<ChatMessageProps> = ({
+  message,
+  setIsChangeMessageModalOpened,
+  setChangeMessage,
+}) => {
   const loginUser = useAppSelector((state) => state.user.login)
-  const [isChangeMessageModalOpened, setIsChangeMessageModalOpened] = useState(false)
   const editable = message.createdBy.login === loginUser
 
   const onEditMessage = () => {
     if (editable) {
+      setChangeMessage(message)
       setIsChangeMessageModalOpened(true)
     }
   }
@@ -32,11 +37,6 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
         loginUser === message.createdBy.login ? styles.owner : ""
       )}
     >
-      <ChangeMessageModal
-        isOpen={isChangeMessageModalOpened}
-        setIsOpen={setIsChangeMessageModalOpened}
-        message={message}
-      />
       <img
         className={styles.message__avatar}
         alt="user avatar"

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useAppSelector } from "../../hooks"
 import { deleteMessage, editMessage } from "../../api/services/message"
 import { CustomModal } from "../../common/CustomModal"
@@ -37,7 +37,7 @@ export const ChangeMessageModal: React.FC<ChangeMessageModalProps> = ({
   }
 
   const deleteMessageAndCloseModal = () => {
-    deleteMessage(chatId, message.id, token).then((x) => {
+    deleteMessage(chatId, message.id, token).then((_) => {
       setIsOpen(false)
     })
   }
@@ -45,6 +45,10 @@ export const ChangeMessageModal: React.FC<ChangeMessageModalProps> = ({
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.key === "Enter" && saveAndCloseModal()
   }
+
+  useEffect(() => {
+    setMessageText(message.text)
+  }, [message.text])
 
   return (
     <CustomModal isOpen={isOpen}>

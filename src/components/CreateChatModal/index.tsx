@@ -1,5 +1,12 @@
 import styles from "./index.module.scss"
-import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 import { CHATS_TYPES } from "../../config"
 import { Input } from "../../common/Input"
 import { createChat, getAllChats, getAllUsers } from "../../api/services/chat"
@@ -25,6 +32,7 @@ export const CreateChatModal: React.FC<CreateChatProps> = ({
   const [isErrorSearchUser, setIsErrorSearchUser] = useState(false)
   const [isAddedUser, setIsUserAdded] = useState(false)
   const [isErrorInput, setIsErrorInput] = useState(false)
+  const [isErrorCountMembers, setIsErrorCountMembers] = useState(false)
 
   const dispatch = useAppDispatch()
 
@@ -40,10 +48,16 @@ export const CreateChatModal: React.FC<CreateChatProps> = ({
 
     setIsUserAdded(false)
     setIsErrorSearchUser(false)
+    setIsErrorCountMembers(false)
+
     if (usersNames.includes(nameMember)) {
       if (!members.current.includes(nameMember)) {
-        members.current.push(nameMember)
-        setNameMember("")
+        if (chatType !== CHATS_TYPES.PRIVATE || members.current.length < 1) {
+          members.current.push(nameMember)
+          setNameMember("")
+        } else {
+          setIsErrorCountMembers(true)
+        }
       } else {
         setIsUserAdded(true)
       }
@@ -67,6 +81,11 @@ export const CreateChatModal: React.FC<CreateChatProps> = ({
     }
   }
 
+  const checkSetChatType = (e: ChangeEvent<HTMLSelectElement>) => {
+    members.current = []
+    setChatType(e.target.value)
+  }
+
   useEffect(() => {
     getAllUsers().then((data) => dispatch(setUsers(data.users)))
   }, [dispatch])
@@ -87,7 +106,7 @@ export const CreateChatModal: React.FC<CreateChatProps> = ({
         />
         <select
           value={chatType}
-          onChange={(e) => setChatType(e.target.value)}
+          onChange={(e) => checkSetChatType(e)}
           placeholder="Тип чата"
           className={styles.selectorTypes}
         >
@@ -101,6 +120,9 @@ export const CreateChatModal: React.FC<CreateChatProps> = ({
           )}
           {isAddedUser && (
             <p style={{ color: "white" }}>Пользователь уже в списке</p>
+          )}
+          {isErrorCountMembers && (
+            <p style={{ color: "white" }}>Ошибочное количество пользователей</p>
           )}
           <Input
             title="Имя"
