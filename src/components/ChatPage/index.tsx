@@ -1,5 +1,5 @@
 import styles from "./index.module.scss"
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { getAllChats } from "../../api/services/chat"
 import ChatList from "./ChatList/index"
 import Chat from "./Chat"
@@ -19,14 +19,16 @@ const ChatPage = () => {
   const token = useAppSelector((state) => state.user.token)
   const [creatingChat, setCreatingChat] = useState(false)
 
+  const updateChats = useCallback(
+    () => getAllChats(token).then((data) => dispatch(setChats(data.chats))),
+    [dispatch, token]
+  )
+
   useEffect(() => {
-    const unsubscribe = setInterval(
-      () => getAllChats(token).then((data) => dispatch(setChats(data.chats))),
-      500
-    )
+    const unsubscribe = setInterval(updateChats, 500)
 
     return () => clearInterval(unsubscribe)
-  }, [dispatch, token])
+  }, [dispatch, token, updateChats])
 
   const onSendMessage = () => {
     getAllChats(token).then((data) => dispatch(setChats(data.chats)))

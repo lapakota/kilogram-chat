@@ -10,7 +10,7 @@ export const getAllChats = (token: string) => {
             id
             image
             name
-            messages(first: 1000) {
+            messages(first: 250) {
               id
               text
               createdAt

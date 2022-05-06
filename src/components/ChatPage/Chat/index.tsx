@@ -22,7 +22,7 @@ const Chat = ({ className, chatId }: ChatProps) => {
     <div style={chatStyles} className={className}>
       {chat ? (
         chat.messages.map((message: Message) => (
-          <ChatMessage key={message.id} message={message} />
+          <ChatMessage key={message.id + message.createdAt} message={message} />
         ))
       ) : (
         <div className={"chat__blank"}>Выберите чат</div>
