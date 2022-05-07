@@ -1,8 +1,8 @@
 import styles from "./index.module.scss"
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { getAllChats } from "../../api/services/chat"
 import ChatList from "./ChatList/index"
-import Chat from "./Chat"
+import ChatArea from "./Chat"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { setChats } from "../../store/slices/chatsSlice"
 import ChatInput from "./ChatInput"
@@ -55,15 +55,15 @@ const ChatPage = () => {
       )}
       <ChatList className={styles.chatPage__chatList} chats={chats} />
       <main className={styles.chatPage__main}>
-        <Chat
+        <ChatArea
           className={styles.chatPage__chat}
-          chatId={activeChatId}
+          activeChat={activeChat}
           setIsChangeMessageModalOpened={setIsChangeMessageModalOpened}
           setChangeMessage={setChangeMessage}
         />
       </main>
       <ChatInput onSendMessage={onSendMessage} chat={activeChat} />
-      <ChatInfo />
+      <ChatInfo activeChat={activeChat} />
       <CustomButton
         className={styles.chatPage__createButton}
         text={"Создать чат"}
