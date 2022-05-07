@@ -12,7 +12,7 @@ type ChatMessageProps = {
   setChangeMessage: Dispatch<Message>
 }
 
-const BLANK_USER_AVATAR =
+export const BLANK_USER_AVATAR =
   "https://w7.pngwing.com/pngs/547/748/png-transparent-anonymous-avatar-youtube-anonymity-anonymous-emblem-photography-logo.png"
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({

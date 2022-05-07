@@ -6,22 +6,33 @@ export const getAllChats = (token: string) => {
     headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify({
       query: `{
-          chats(first: 100) {
-            id
+        chats(first: 100) {
+          id
+          type
+          image
+          name
+          members(first: 100) {
             image
+            login
             name
-            messages(first: 250) {
-              id
-              text
-              createdAt
-              createdBy { 
-                image
-                login 
-                name
-              }
+          }
+          messages(first: 250) {
+            id
+            text
+            createdAt
+            createdBy {
+              image
+              login
+              name
             }
           }
-        }`,
+          owner {
+            image
+            login
+            name
+          }
+        }
+      }`,
     }),
   })
     .then((response) => response.json())
