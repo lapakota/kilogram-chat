@@ -1,34 +1,30 @@
 import React, { Dispatch } from "react"
 import Message from "../../../models/Message"
 import { ChatMessage } from "../ChatMessage"
-import { useAppSelector } from "../../../hooks"
 import "./index.scss"
+import Chat from "../../../models/Chat"
 
 type ChatProps = {
   className?: string
-  chatId: number | string
+  activeChat: Chat | undefined
   setIsChangeMessageModalOpened: Dispatch<boolean>
   setChangeMessage: Dispatch<Message>
 }
 
-const Chat = ({
+const ChatArea = ({
   className,
-  chatId,
+  activeChat,
   setIsChangeMessageModalOpened,
   setChangeMessage,
 }: ChatProps) => {
-  const chat = useAppSelector((state) =>
-    state.chats.chats.find((x) => x.id === chatId)
-  )
-
-  const chatStyles = chat
+  const chatStyles = activeChat
     ? {}
     : { display: "flex", alignItems: "center", justifyContent: "center" }
 
   return (
     <div style={chatStyles} className={className}>
-      {chat ? (
-        chat.messages.map((message: Message) => (
+      {activeChat ? (
+        activeChat.messages.map((message: Message) => (
           <ChatMessage
             key={message.id + message.createdAt}
             message={message}
@@ -43,4 +39,4 @@ const Chat = ({
   )
 }
 
-export default Chat
+export default ChatArea
